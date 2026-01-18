@@ -1,6 +1,7 @@
 import { Header } from '@/common/components'
 import { useAppSelector } from '@/common/hooks'
 import type { RootState } from '@/app/store.ts'
+import { Routing } from '@/common/routing'
 
 export const App = () => {
   const theme = useAppSelector((state: RootState) => state.theme.theme)
@@ -14,7 +15,7 @@ export const App = () => {
   return (
     <div style={style}>
       <Header />
-      <h1>{'app'}</h1>
+      <Routing />
     </div>
   )
 }

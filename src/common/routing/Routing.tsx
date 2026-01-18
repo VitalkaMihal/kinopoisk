@@ -1,0 +1,25 @@
+import { Route, Routes } from 'react-router-dom'
+
+export const Path = {
+  Main: '/kinopoisk',
+  Category: '/kinopoisk/Category',
+  Movies: '/kinopoisk/Movies',
+  Filtered: '/kinopoisk/Filtered',
+  Search: '/kinopoisk/Search',
+  Favorites: '/kinopoisk/Favorites',
+  PageNonFound: '*',
+} as const
+
+export const Routing = () => {
+  return (
+    <Routes>
+      <Route path={Path.Main} element={<h2>Main</h2>} />
+      <Route path={Path.Category} element={<h2>Category</h2>} />
+      <Route path={Path.Movies} element={<h2>Movies</h2>} />
+      <Route path={Path.Filtered} element={<h2>Filtered</h2>} />
+      <Route path={Path.Search} element={<h2>Search</h2>} />
+      <Route path={Path.Favorites} element={<h2>Favorites</h2>} />
+      <Route path={Path.PageNonFound} element={<h2>404</h2>} />
+    </Routes>
+  )
+}

@@ -2,20 +2,36 @@ import styles from './Header.module.css'
 import kinopoiskLogo from '@/assets/logo/kinopoisk-logo.svg'
 import { useAppDispatch } from '@/common/hooks'
 import { toggleTheme } from '@/features/themeSlice.ts'
+import { Path } from '@/common/routing'
+import { Link } from 'react-router-dom'
 
 export const Header = () => {
   const dispatch = useAppDispatch()
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.headerContainer}>
-        <img src={kinopoiskLogo} alt="logo" className={styles.logo} />
+        <Link to={Path.Main}>
+          <img src={kinopoiskLogo} alt="logo" className={styles.logo} />
+        </Link>
         <nav className={styles.nav}>
-          <span>Main</span>
-          <span>Category</span>
-          <span>Movies</span>
-          <span>Filtered</span>
-          <span>Movies Search</span>
-          <span>Favorites</span>
+          <Link to={Path.Main} className={styles.link}>
+            Main
+          </Link>
+          <Link to={Path.Category} className={styles.link}>
+            Category
+          </Link>
+          <Link to={Path.Movies} className={styles.link}>
+            Movies
+          </Link>
+          <Link to={Path.Filtered} className={styles.link}>
+            Filtered
+          </Link>
+          <Link to={Path.Search} className={styles.link}>
+            Movies Search
+          </Link>
+          <Link to={Path.Favorites} className={styles.link}>
+            Favorites
+          </Link>
         </nav>
         <button
           onClick={() => {

@@ -31,6 +31,10 @@
     font-weight: 500;
 }
 
+.link {
+    text-decoration: none;
+    color: inherit;
+}
 /* при узкой ширине, например максимум 768px, меняем расположение */
 @media (max-width: 768px) {
     .headerContainer {
