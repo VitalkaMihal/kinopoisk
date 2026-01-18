@@ -1,0 +1,80 @@
+/* Header.module.css */
+
+.headerWrapper {
+    width: 100%;
+    padding: 8px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.headerContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    flex-wrap: wrap; /* добавлено, чтобы элементы переносились при необходимости */
+}
+
+/* остальные стили без изменений */
+.logo {
+    height: 40px;
+}
+
+/* навигация */
+.nav {
+    display: flex;
+    gap: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* при узкой ширине, например максимум 768px, меняем расположение */
+@media (max-width: 768px) {
+    .headerContainer {
+        flex-direction: column; /* вертикальная ориентация */
+        align-items: center; /* центровка элементов */
+        height: auto; /* высота под контент */
+        padding: 10px 20px; /* немного больше отступов вертикально */
+    }
+
+    .nav {
+        flex-direction: column; /* вертикальный список */
+        gap: 10px; /* меньше промежутки между пунктами */
+        margin-top: 10px; /* отступ сверху */
+        width: 100%; /* чтобы занимать всю ширину контейнера */
+        align-items: center; /* центровать при горизонтальном расположении */
+    }
+
+    /* при необходимости — сделать кнопку тоже адаптивной или изменить стиль */
+    .button {
+        width: 100%; /* растянуть на всю ширину или оставить как есть */
+        text-align: center;
+    }
+}
+
+/* Наведение и другие стили без изменений */
+.nav span {
+    cursor: pointer;
+}
+
+.nav span:hover {
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.button {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.button:hover {
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
