@@ -1,3 +1,10 @@
+import { Header } from '@/common/components'
+
 export const App = () => {
-  return <h1>{'app'}</h1>
+  return (
+    <>
+      <Header />
+      <h1>{'app'}</h1>
+    </>
+  )
 }
