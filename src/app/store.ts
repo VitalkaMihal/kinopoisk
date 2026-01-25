@@ -1,11 +1,14 @@
 // app/store.ts
 import { configureStore } from '@reduxjs/toolkit'
 import { themeSliceReducer } from '../features/themeSlice'
+import { baseApi } from '@/app/baseApi.ts'
 
 export const store = configureStore({
   reducer: {
     theme: themeSliceReducer,
+    [baseApi.reducerPath]: baseApi.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware),
 })
 
 // типы для типизации

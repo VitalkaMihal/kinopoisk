@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
+import { Main } from '@/features/popular/ui/Main.tsx'
 
 export const Path = {
   Main: '/kinopoisk',
@@ -13,7 +14,7 @@ export const Path = {
 export const Routing = () => {
   return (
     <Routes>
-      <Route path={Path.Main} element={<h2>Main</h2>} />
+      <Route path={Path.Main} element={<Main />} />
       <Route path={Path.Category} element={<h2>Category</h2>} />
       <Route path={Path.Movies} element={<h2>Movies</h2>} />
       <Route path={Path.Filtered} element={<h2>Filtered</h2>} />

@@ -1,0 +1,28 @@
+.main {
+    /*background-image: url("https://image.tmdb.org/t/p/original/3F2EXWF1thX0BdrVaKvnm6mAhqh.jpg");*/
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 80vh;
+    background-color: #bda2a2;
+}
+
+.mainContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 200px 20px;
+    color: white;
+    text-shadow:
+            -1px -1px 0 black,
+            1px -1px 0 black,
+            -1px 1px 0 black,
+            1px 1px 0 black;
+}
+
+.mainContainer h2 {
+    font-size: 90px;
+}
+
+.mainContainer h4 {
+    font-size: 36px;
+}
