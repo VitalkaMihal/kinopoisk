@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { Main } from '@/features/popular/ui/Main.tsx'
+import { Category } from '@/features/popular/ui/category'
 
 export const Path = {
   Main: '/kinopoisk',
@@ -15,7 +16,7 @@ export const Routing = () => {
   return (
     <Routes>
       <Route path={Path.Main} element={<Main />} />
-      <Route path={Path.Category} element={<h2>Category</h2>} />
+      <Route path={Path.Category} element={<Category />} />
       <Route path={Path.Movies} element={<h2>Movies</h2>} />
       <Route path={Path.Filtered} element={<h2>Filtered</h2>} />
       <Route path={Path.Search} element={<h2>Search</h2>} />

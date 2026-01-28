@@ -5,7 +5,7 @@ import { bgUrl } from '@/common/constants'
 const random = Math.ceil(Math.random() * 6)
 
 export const Main = () => {
-  const { data, isLoading } = useGetPopularQuery()
+  const { data } = useGetPopularQuery()
 
   const bgUrlRandom = data?.results[random].backdrop_path
   return (
