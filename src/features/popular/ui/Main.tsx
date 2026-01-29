@@ -1,11 +1,11 @@
 import { useGetPopularQuery } from '@/features/popular/api/popularApi.ts'
 import s from './Main.module.css'
-import { bgUrl } from '@/common/constants'
+import { bgUrl, category } from '@/common/constants'
 
 const random = Math.ceil(Math.random() * 6)
 
 export const Main = () => {
-  const { data } = useGetPopularQuery()
+  const { data } = useGetPopularQuery(category.POPULAR)
 
   const bgUrlRandom = data?.results[random].backdrop_path
   return (
