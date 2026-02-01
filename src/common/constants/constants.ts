@@ -1,4 +1,5 @@
 export const bgUrl = 'https://image.tmdb.org/t/p/original'
+export const cardUrl = 'https://image.tmdb.org/t/p/w500'
 
 export const category = {
   NOW: 'now_playing',

@@ -1,0 +1,55 @@
+/* MovieCard.module.css */
+
+.card {
+    width: 300px;
+    height: 450px;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.overlay {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* Стиль для кружка с рейтингом */
+.ratingCircle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Цвета для рейтинга по значению */
+.ratingHigh {
+    background-color: #4caf50; /* зеленый */
+}
+.ratingMedium {
+    background-color: #ff9800; /* оранжевый */
+}
+.ratingLow {
+    background-color: #f44336; /* красный */
+}
