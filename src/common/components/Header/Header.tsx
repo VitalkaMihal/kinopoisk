@@ -18,16 +18,13 @@ export const Header = () => {
             Main
           </Link>
           <Link to={Path.Category} className={styles.link}>
-            Category
-          </Link>
-          <Link to={Path.Movies} className={styles.link}>
-            Movies
+            Category Movies
           </Link>
           <Link to={Path.Filtered} className={styles.link}>
-            Filtered
+            Filtered Movies
           </Link>
           <Link to={Path.Search} className={styles.link}>
-            Movies Search
+            Search
           </Link>
           <Link to={Path.Favorites} className={styles.link}>
             Favorites

@@ -2,25 +2,30 @@ import { useGetPopularQuery } from '@/features/popular/api/popularApi.ts'
 import { category, type categoryType } from '@/common/constants'
 import { useState } from 'react'
 import { Card } from '@/common/components/Card'
+import s from './Category.module.css'
 
 export const Category = () => {
   const [categoryMovies, getCategoryMovies] = useState<categoryType>(category.POPULAR)
 
   const { data } = useGetPopularQuery(categoryMovies)
-  if (data) {
-    console.log(data.results[0])
-  }
+
   if (!data) {
     return
   }
 
   return (
-    <div>
-      <button onClick={() => getCategoryMovies(category.POPULAR)}>Popular Movies</button>
-      <button onClick={() => getCategoryMovies(category.TOP)}>Top Rated Movies</button>
-      <button onClick={() => getCategoryMovies(category.UPCOMING)}>Upcoming Movies</button>
-      <button onClick={() => getCategoryMovies(category.NOW)}>Now Playing Movies</button>
-      <Card title={data.results[0].title} poster={data.results[0].poster_path} rating={data.results[0].vote_average} />
+    <div className={s.container}>
+      <div className={s.buttonsWrapper}>
+        <button onClick={() => getCategoryMovies(category.POPULAR)}>Popular Movies</button>
+        <button onClick={() => getCategoryMovies(category.TOP)}>Top Rated Movies</button>
+        <button onClick={() => getCategoryMovies(category.UPCOMING)}>Upcoming Movies</button>
+        <button onClick={() => getCategoryMovies(category.NOW)}>Now Playing Movies</button>
+      </div>
+      <div className={s.moviesGrid}>
+        {data.results.map((movie) => (
+          <Card key={movie.id} title={movie.title} poster={movie.poster_path} rating={movie.vote_average} />
+        ))}
+      </div>
     </div>
   )
 }

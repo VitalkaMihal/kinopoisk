@@ -5,7 +5,6 @@ import { Category } from '@/features/popular/ui/category'
 export const Path = {
   Main: '/kinopoisk',
   Category: '/kinopoisk/Category',
-  Movies: '/kinopoisk/Movies',
   Filtered: '/kinopoisk/Filtered',
   Search: '/kinopoisk/Search',
   Favorites: '/kinopoisk/Favorites',
@@ -17,7 +16,6 @@ export const Routing = () => {
     <Routes>
       <Route path={Path.Main} element={<Main />} />
       <Route path={Path.Category} element={<Category />} />
-      <Route path={Path.Movies} element={<h2>Movies</h2>} />
       <Route path={Path.Filtered} element={<h2>Filtered</h2>} />
       <Route path={Path.Search} element={<h2>Search</h2>} />
       <Route path={Path.Favorites} element={<h2>Favorites</h2>} />
