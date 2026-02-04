@@ -3,9 +3,13 @@ import { category, type categoryType } from '@/common/constants'
 import { useState } from 'react'
 import { Card } from '@/common/components/Card'
 import s from './Category.module.css'
+import { selectCategory } from '@/app/appSlice.ts'
+import { useAppSelector } from '@/common/hooks'
 
 export const Category = () => {
-  const [categoryMovies, getCategoryMovies] = useState<categoryType>(category.POPULAR)
+  const categoryStore = useAppSelector(selectCategory)
+  console.log(categoryStore)
+  const [categoryMovies, getCategoryMovies] = useState<categoryType>(categoryStore)
 
   const { data } = useGetPopularQuery(categoryMovies)
 

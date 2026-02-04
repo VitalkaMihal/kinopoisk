@@ -1,7 +1,11 @@
 import { useGetPopularQuery } from '@/features/popular/api/popularApi.ts'
-import type { categoryType } from '@/common/constants'
+import { type categoryType } from '@/common/constants'
 import { Card } from '@/common/components/Card'
 import s from './PreviewCategory.module.css'
+import { useNavigate } from 'react-router-dom'
+import { Path } from '@/common/routing'
+import { useAppDispatch } from '@/common/hooks'
+import { changeCategoryAC } from '@/app/appSlice.ts'
 
 type Props = {
   previewCategory: categoryType
@@ -10,15 +14,28 @@ type Props = {
 
 export const PreviewCategory = ({ previewCategory, titleCategory }: Props) => {
   const { data } = useGetPopularQuery(previewCategory)
+  const navigate = useNavigate()
+
+  const dispatch = useAppDispatch()
 
   if (!data) {
     return
   }
   const previevData = data.results.slice(0, 6)
 
+  const viewMoreHandler = () => {
+    navigate(Path.Category)
+    dispatch(changeCategoryAC(previewCategory))
+  }
+
   return (
     <div className={s.container}>
-      <span className={s.title}>{titleCategory}</span>
+      <div className={s.titleBox}>
+        <span className={s.title}>{titleCategory}</span>
+        <button className={s.titleButton} onClick={viewMoreHandler}>
+          View more
+        </button>
+      </div>
       <div className={s.cards}>
         {previevData.map((movie) => (
           <Card key={movie.id} title={movie.title} poster={movie.poster_path} rating={movie.vote_average} />

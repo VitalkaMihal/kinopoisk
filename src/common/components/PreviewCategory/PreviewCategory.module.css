@@ -6,9 +6,21 @@ max-width: 1200px;
     flex-direction: column;
 }
 
+.titleBox {
+    display: flex;
+    justify-content: space-between;
+}
+
 .title {
     font-size: 36px;
     margin: 16px 0;
+}
+
+.titleButton {
+    padding: 10px;
+    border-radius: 10px;
+    height: 40px;
+    align-self: center;
 }
 
 .cards {
