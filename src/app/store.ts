@@ -2,16 +2,19 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { themeSliceReducer } from '../features/themeSlice'
 import { baseApi } from '@/app/baseApi.ts'
-import { appReducer } from '@/app/appSlice.ts'
+import { appReducer, appSlice } from '@/app/appSlice.ts'
+import { setupListeners } from '@reduxjs/toolkit/query'
 
 export const store = configureStore({
   reducer: {
     theme: themeSliceReducer,
-    app: appReducer,
+    [appSlice.name]: appReducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware),
 })
+
+setupListeners(store.dispatch)
 
 // типы для типизации
 export type RootState = ReturnType<typeof store.getState>

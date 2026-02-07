@@ -3,7 +3,6 @@ import { type categoryType } from '@/common/constants'
 import { Card } from '@/common/components/Card'
 import s from './PreviewCategory.module.css'
 import { useNavigate } from 'react-router-dom'
-import { Path } from '@/common/routing'
 import { useAppDispatch } from '@/common/hooks'
 import { changeCategoryAC } from '@/app/appSlice.ts'
 
@@ -24,7 +23,7 @@ export const PreviewCategory = ({ previewCategory, titleCategory }: Props) => {
   const previevData = data.results.slice(0, 6)
 
   const viewMoreHandler = () => {
-    navigate(Path.Category)
+    navigate(`/kinopoisk/Category/${previewCategory}`)
     dispatch(changeCategoryAC(previewCategory))
   }
 

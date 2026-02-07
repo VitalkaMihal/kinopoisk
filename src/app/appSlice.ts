@@ -5,7 +5,7 @@ const initialState = {
   category: category.POPULAR as categoryType,
 }
 
-const appSlice = createSlice({
+export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: (create) => ({

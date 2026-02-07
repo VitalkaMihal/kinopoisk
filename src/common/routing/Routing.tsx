@@ -4,7 +4,7 @@ import { Category } from '@/features/popular/ui/category'
 
 export const Path = {
   Main: '/kinopoisk',
-  Category: '/kinopoisk/Category',
+  Category: `/kinopoisk/Category/:categoryName`,
   Filtered: '/kinopoisk/Filtered',
   Search: '/kinopoisk/Search',
   Favorites: '/kinopoisk/Favorites',

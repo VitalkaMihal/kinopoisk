@@ -1,17 +1,24 @@
 import { useGetPopularQuery } from '@/features/popular/api/popularApi.ts'
 import { category, type categoryType } from '@/common/constants'
-import { useState } from 'react'
 import { Card } from '@/common/components/Card'
 import s from './Category.module.css'
-import { selectCategory } from '@/app/appSlice.ts'
-import { useAppSelector } from '@/common/hooks'
+import { changeCategoryAC, selectCategory } from '@/app/appSlice.ts'
+import { useAppDispatch, useAppSelector } from '@/common/hooks'
+import { useNavigate } from 'react-router-dom'
 
 export const Category = () => {
   const categoryStore = useAppSelector(selectCategory)
-  console.log(categoryStore)
-  const [categoryMovies, getCategoryMovies] = useState<categoryType>(categoryStore)
 
-  const { data } = useGetPopularQuery(categoryMovies)
+  const dispatch = useAppDispatch()
+
+  const navigate = useNavigate()
+
+  const { data } = useGetPopularQuery(categoryStore)
+
+  const getCategoryMoviesHandler = (filmCategory: categoryType) => {
+    dispatch(changeCategoryAC(filmCategory))
+    navigate(`/kinopoisk/Category/${filmCategory}`)
+  }
 
   if (!data) {
     return
@@ -20,10 +27,10 @@ export const Category = () => {
   return (
     <div className={s.container}>
       <div className={s.buttonsWrapper}>
-        <button onClick={() => getCategoryMovies(category.POPULAR)}>Popular Movies</button>
-        <button onClick={() => getCategoryMovies(category.TOP)}>Top Rated Movies</button>
-        <button onClick={() => getCategoryMovies(category.UPCOMING)}>Upcoming Movies</button>
-        <button onClick={() => getCategoryMovies(category.NOW)}>Now Playing Movies</button>
+        <button onClick={() => getCategoryMoviesHandler(category.POPULAR)}>Popular Movies</button>
+        <button onClick={() => getCategoryMoviesHandler(category.TOP)}>Top Rated Movies</button>
+        <button onClick={() => getCategoryMoviesHandler(category.UPCOMING)}>Upcoming Movies</button>
+        <button onClick={() => getCategoryMoviesHandler(category.NOW)}>Now Playing Movies</button>
       </div>
       <div className={s.moviesGrid}>
         {data.results.map((movie) => (

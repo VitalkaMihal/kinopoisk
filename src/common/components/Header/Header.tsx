@@ -1,12 +1,22 @@
+import React from 'react'
 import styles from './Header.module.css'
 import kinopoiskLogo from '@/assets/logo/kinopoisk-logo.svg'
 import { useAppDispatch } from '@/common/hooks'
 import { toggleTheme } from '@/features/themeSlice.ts'
 import { Path } from '@/common/routing'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { category } from '@/common/constants'
 
 export const Header = () => {
   const dispatch = useAppDispatch()
+
+  const navigate = useNavigate()
+
+  const navigateHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault()
+    navigate(`/kinopoisk/Category/${category.POPULAR}`)
+  }
+
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.headerContainer}>
@@ -17,7 +27,7 @@ export const Header = () => {
           <Link to={Path.Main} className={styles.link}>
             Main
           </Link>
-          <Link to={Path.Category} className={styles.link}>
+          <Link to={Path.Category} onClick={(e) => navigateHandler(e)} className={styles.link}>
             Category Movies
           </Link>
           <Link to={Path.Filtered} className={styles.link}>
