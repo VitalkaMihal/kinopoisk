@@ -1,5 +1,5 @@
 import { useGetPopularQuery } from '@/features/popular/api/popularApi.ts'
-import { type categoryType } from '@/common/constants'
+import { type categoryType, kinopoiskCategory } from '@/common/constants'
 import { Card } from '@/common/components/Card'
 import s from './PreviewCategory.module.css'
 import { useNavigate } from 'react-router-dom'
@@ -23,7 +23,7 @@ export const PreviewCategory = ({ previewCategory, titleCategory }: Props) => {
   const previevData = data.results.slice(0, 6)
 
   const viewMoreHandler = () => {
-    navigate(`/kinopoisk/Category/${previewCategory}`)
+    navigate(`${kinopoiskCategory}${previewCategory}`)
     dispatch(changeCategoryAC(previewCategory))
   }
 

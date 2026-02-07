@@ -5,7 +5,7 @@ import { useAppDispatch } from '@/common/hooks'
 import { toggleTheme } from '@/features/themeSlice.ts'
 import { Path } from '@/common/routing'
 import { Link, useNavigate } from 'react-router-dom'
-import { category } from '@/common/constants'
+import { category, kinopoiskCategory } from '@/common/constants'
 
 export const Header = () => {
   const dispatch = useAppDispatch()
@@ -14,11 +14,11 @@ export const Header = () => {
 
   const navigateHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault()
-    navigate(`/kinopoisk/Category/${category.POPULAR}`)
+    navigate(`${kinopoiskCategory}${category.POPULAR}`)
   }
 
   return (
-    <div className={styles.headerWrapper}>
+    <header className={styles.headerWrapper}>
       <div className={styles.headerContainer}>
         <Link to={Path.Main}>
           <img src={kinopoiskLogo} alt="logo" className={styles.logo} />
@@ -49,6 +49,6 @@ export const Header = () => {
           nite
         </button>
       </div>
-    </div>
+    </header>
   )
 }

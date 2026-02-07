@@ -1,5 +1,5 @@
 import { useGetPopularQuery } from '@/features/popular/api/popularApi.ts'
-import { category, type categoryType } from '@/common/constants'
+import { category, type categoryType, kinopoiskCategory } from '@/common/constants'
 import { Card } from '@/common/components/Card'
 import s from './Category.module.css'
 import { changeCategoryAC, selectCategory } from '@/app/appSlice.ts'
@@ -17,7 +17,7 @@ export const Category = () => {
 
   const getCategoryMoviesHandler = (filmCategory: categoryType) => {
     dispatch(changeCategoryAC(filmCategory))
-    navigate(`/kinopoisk/Category/${filmCategory}`)
+    navigate(`${kinopoiskCategory}${filmCategory}`)
   }
 
   if (!data) {

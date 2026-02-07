@@ -8,4 +8,6 @@ export const category = {
   UPCOMING: 'upcoming',
 } as const
 
+export const kinopoiskCategory = '/kinopoisk/Category/'
+
 export type categoryType = 'now_playing' | 'popular' | 'top_rated' | 'upcoming'
