@@ -3,6 +3,7 @@ import { useAppSelector } from '@/common/hooks'
 import type { RootState } from '@/app/store.ts'
 import { Routing } from '@/common/routing'
 import { Footer } from '@/common/components/Footer/Footer.tsx'
+import s from './App.module.css'
 
 export const App = () => {
   const theme = useAppSelector((state: RootState) => state.theme.theme)
@@ -14,9 +15,11 @@ export const App = () => {
   }
 
   return (
-    <div style={style}>
+    <div style={style} className={s.wrapper}>
       <Header />
-      <Routing />
+      <div className={s.content}>
+        <Routing />
+      </div>
       <Footer />
     </div>
   )

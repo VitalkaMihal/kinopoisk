@@ -15,10 +15,11 @@ export const Header = () => {
   const navigateHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault()
     navigate(`${kinopoiskCategory}${category.POPULAR}`)
+    window.scrollTo(0, 0)
   }
 
   return (
-    <header className={styles.headerWrapper}>
+    <div className={styles.headerWrapper}>
       <div className={styles.headerContainer}>
         <Link to={Path.Main}>
           <img src={kinopoiskLogo} alt="logo" className={styles.logo} />
@@ -49,6 +50,6 @@ export const Header = () => {
           nite
         </button>
       </div>
-    </header>
+    </div>
   )
 }

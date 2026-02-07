@@ -10,9 +10,9 @@ export const Main = () => {
 
   const bgUrlRandom = data?.results[random].backdrop_path
   return (
-    <div>
+    <div className={s.main}>
       <div
-        className={s.main}
+        className={s.mainBgPicture}
         style={{
           backgroundImage: `url(${bgUrl + bgUrlRandom})`,
         }}
