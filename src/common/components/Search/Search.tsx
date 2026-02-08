@@ -5,6 +5,8 @@ import s from './Search.module.css'
 
 export const Search = () => {
   const [inputValue, setInputValue] = useState('')
+  const [textSearchin, setTextSearchin] = useState('')
+
   const [trigger, { data, error }] = useLazyGetSearchQuery()
 
   console.log(error)
@@ -12,6 +14,8 @@ export const Search = () => {
   const handleSearch = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     trigger(inputValue)
+    setTextSearchin(inputValue)
+    setInputValue('')
   }
 
   const handlerInput = (value: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,27 +24,41 @@ export const Search = () => {
 
   return (
     <div className={s.searchContainer}>
-      <form>
-        <input
-          type="search"
-          onChange={(e) => {
-            handlerInput(e)
-          }}
-          value={inputValue}
-        />
-        <button
-          type="submit"
-          onClick={(e) => {
-            handleSearch(e)
-          }}
-        >
-          Search
-        </button>
-      </form>
+      <div className={s.formContainer}>
+        <h2>Search Results</h2>
+        <form className={s.form}>
+          <input
+            type="search"
+            onChange={(e) => {
+              handlerInput(e)
+            }}
+            value={inputValue}
+          />
+          <button
+            type="submit"
+            onClick={(e) => {
+              handleSearch(e)
+            }}
+          >
+            Search
+          </button>
+        </form>
+        <div className={s.text}>
+          {!data ? 'Enter a movie title to start searching.' : `Results for "${textSearchin}"`}
+        </div>
+      </div>
       <div className={s.cards}>
         {data &&
-          data.results.map((movie) => (
-            <Card key={movie.id} title={movie.title} poster={movie.poster_path} rating={movie.vote_average} />
+          (data.results.length ? (
+            data.results.map((movie) => (
+              <Card key={movie.id} title={movie.title} poster={movie.poster_path} rating={movie.vote_average} />
+            ))
+          ) : (
+            <span>
+              {`No matches found for`}
+              <br />
+              {`"${textSearchin}".`}
+            </span>
           ))}
       </div>
     </div>
