@@ -9,12 +9,15 @@ export const popularApi = baseApi.injectEndpoints({
         url: `/movie/${category}`,
       }),
     }),
-    getCategory: build.query<PopularApi, void>({
-      query: () => ({
-        url: '/movie/popular',
+    getSearch: build.query<PopularApi, string>({
+      query: (search) => ({
+        url: `/search/movie`,
+        params: {
+          query: search,
+        },
       }),
     }),
   }),
 })
 
-export const { useGetPopularQuery } = popularApi
+export const { useGetPopularQuery, useLazyGetSearchQuery } = popularApi

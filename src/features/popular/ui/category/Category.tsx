@@ -1,10 +1,10 @@
 import { useGetPopularQuery } from '@/features/popular/api/popularApi.ts'
 import { category, type categoryType, kinopoiskCategory } from '@/common/constants'
-import { Card } from '@/common/components/Card'
 import s from './Category.module.css'
 import { changeCategoryAC, selectCategory } from '@/app/appSlice.ts'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
 import { useNavigate } from 'react-router-dom'
+import { Card } from '@/common/components'
 
 export const Category = () => {
   const categoryStore = useAppSelector(selectCategory)

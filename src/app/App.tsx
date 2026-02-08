@@ -1,8 +1,7 @@
-import { Header } from '@/common/components'
+import { Footer, Header } from '@/common/components'
 import { useAppSelector } from '@/common/hooks'
 import type { RootState } from '@/app/store.ts'
 import { Routing } from '@/common/routing'
-import { Footer } from '@/common/components/Footer/Footer.tsx'
 import s from './App.module.css'
 
 export const App = () => {
