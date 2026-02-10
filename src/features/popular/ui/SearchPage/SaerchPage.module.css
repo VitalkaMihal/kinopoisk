@@ -1,0 +1,52 @@
+.searchContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    letter-spacing: 1px;
+}
+
+.cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cards span {
+    font-size: 32px;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.formContainer h2 {
+    font-size: 36px;
+    margin: 40px 0;
+}
+
+.form {
+    display: flex;
+}
+
+.form input {
+    padding: 20px;
+    font-size: 20px;
+    width: 500px;
+    border-radius: 50px;
+    margin-right: 30px;
+}
+
+.form button {
+    background: #1754ef;
+    border-radius: 50px;
+    font-size: 20px;
+    padding: 10px 40px;
+}
+
+.text {
+    margin: 30px 0;
+    width: 300px;
+    font-size: 32px;
+    font-weight: normal;
+
+}

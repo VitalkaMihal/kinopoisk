@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { Main } from '@/features/popular/ui/Main.tsx'
 import { Category } from '@/features/popular/ui/category'
+import { SearchPage } from '@/features/popular/ui/SearchPage/SearchPage.tsx'
 import { Search } from '@/common/components'
 
 export const Path = {
