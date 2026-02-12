@@ -1,5 +1,5 @@
 import { useGetPopularQuery } from '@/features/popular/api/popularApi.ts'
-import { category, type categoryType, kinopoiskCategory } from '@/common/constants'
+import { category, type categoryType, kinopoisk } from '@/common/constants'
 import s from './Category.module.css'
 import { changeCategoryAC, selectCategory } from '@/app/appSlice.ts'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
@@ -17,7 +17,7 @@ export const Category = () => {
 
   const getCategoryMoviesHandler = (filmCategory: categoryType) => {
     dispatch(changeCategoryAC(filmCategory))
-    navigate(`${kinopoiskCategory}${filmCategory}`)
+    navigate(`${kinopoisk.category}${filmCategory}`)
   }
 
   if (!data) {
@@ -34,7 +34,13 @@ export const Category = () => {
       </div>
       <div className={s.moviesGrid}>
         {data.results.map((movie) => (
-          <Card key={movie.id} title={movie.title} poster={movie.poster_path} rating={movie.vote_average} />
+          <Card
+            key={movie.id}
+            title={movie.title}
+            poster={movie.poster_path}
+            rating={movie.vote_average}
+            id={movie.id}
+          />
         ))}
       </div>
     </div>

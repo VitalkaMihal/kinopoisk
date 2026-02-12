@@ -1,10 +1,12 @@
-import { cardUrl } from '@/common/constants'
+import { cardUrl, kinopoisk } from '@/common/constants'
 import s from './Card.module.css'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
   poster: string
   title: string
   rating: number
+  id: number
 }
 
 const getRatingColor = (voteAverage: number): string => {
@@ -15,11 +17,17 @@ const getRatingColor = (voteAverage: number): string => {
 
 const ratingToFixed = (num: number): string => num.toFixed(1)
 
-export const Card = ({ poster, title, rating }: Props) => {
+export const Card = ({ poster, title, rating, id }: Props) => {
   const ratingClass = getRatingColor(rating)
+  const navigate = useNavigate()
+
+  const onClickHandler = () => {
+    navigate(`${kinopoisk.movie}${id}`)
+  }
 
   return (
     <div
+      onClick={onClickHandler}
       className={s.card}
       style={{
         backgroundImage: `url(${cardUrl + poster})`,

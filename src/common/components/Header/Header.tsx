@@ -5,7 +5,8 @@ import { useAppDispatch } from '@/common/hooks'
 import { toggleTheme } from '@/features/themeSlice.ts'
 import { Path } from '@/common/routing'
 import { Link, useNavigate } from 'react-router-dom'
-import { category, kinopoiskCategory } from '@/common/constants'
+import { category, kinopoisk } from '@/common/constants'
+import { changeSearchAC } from '@/app/appSlice.ts'
 
 export const Header = () => {
   const dispatch = useAppDispatch()
@@ -14,9 +15,11 @@ export const Header = () => {
 
   const navigateHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault()
-    navigate(`${kinopoiskCategory}${category.POPULAR}`)
+    navigate(`${kinopoisk.category}${category.POPULAR}`)
     window.scrollTo(0, 0)
   }
+
+  const searghPageHandler = () => dispatch(changeSearchAC(''))
 
   return (
     <div className={styles.headerWrapper}>
@@ -34,7 +37,7 @@ export const Header = () => {
           <Link to={Path.Filtered} className={styles.link}>
             Filtered Movies
           </Link>
-          <Link to={Path.SearchPage} className={styles.link}>
+          <Link to={Path.SearchPage} className={styles.link} onClick={searghPageHandler}>
             Search
           </Link>
           <Link to={Path.Favorites} className={styles.link}>

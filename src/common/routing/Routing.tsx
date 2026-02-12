@@ -2,13 +2,16 @@ import { Route, Routes } from 'react-router-dom'
 import { Main } from '@/features/popular/ui/Main.tsx'
 import { Category } from '@/features/popular/ui/category'
 import { SearchPage } from '@/features/popular/ui/SearchPage/SearchPage.tsx'
+import { Movie } from '@/common/components'
+import { kinopoisk } from '@/common/constants'
 
 export const Path = {
-  Main: '/kinopoisk',
-  Category: `/kinopoisk/Category/:categoryName`,
-  Filtered: '/kinopoisk/Filtered',
-  SearchPage: '/kinopoisk/SearchPage',
-  Favorites: '/kinopoisk/Favorites',
+  Main: `${kinopoisk.main}`,
+  Category: `${kinopoisk.category}:categoryName`,
+  Card: `${kinopoisk.movie}:cardName`,
+  Filtered: `${kinopoisk.filtered}`,
+  SearchPage: `${kinopoisk.searchPage}`,
+  Favorites: `${kinopoisk.favorites}`,
   PageNonFound: '*',
 } as const
 
@@ -17,6 +20,7 @@ export const Routing = () => {
     <Routes>
       <Route path={Path.Main} element={<Main />} />
       <Route path={Path.Category} element={<Category />} />
+      <Route path={Path.Card} element={<Movie />} />
       <Route path={Path.Filtered} element={<h2>Filtered</h2>} />
       <Route path={Path.SearchPage} element={<SearchPage />} />
       <Route path={Path.Favorites} element={<h2>Favorites</h2>} />
