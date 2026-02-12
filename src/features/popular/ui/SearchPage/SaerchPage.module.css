@@ -4,6 +4,11 @@
     letter-spacing: 1px;
 }
 
+.searchContainer h2 {
+    font-size: 40px;
+    margin: 20px 0;
+}
+
 .cards {
     display: flex;
     gap: 20px;

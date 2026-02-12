@@ -34,7 +34,7 @@ export const Header = () => {
           <Link to={Path.Filtered} className={styles.link}>
             Filtered Movies
           </Link>
-          <Link to={Path.Search} className={styles.link}>
+          <Link to={Path.SearchPage} className={styles.link}>
             Search
           </Link>
           <Link to={Path.Favorites} className={styles.link}>

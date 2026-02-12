@@ -1,18 +1,19 @@
-import { useLazyGetSearchQuery } from '@/features/popular/api/popularApi.ts'
-import { Card } from '@/common/components'
 import { useState } from 'react'
 import s from './Search.module.css'
+import { useNavigate } from 'react-router-dom'
+import { Path } from '@/common/routing'
+import { useAppDispatch } from '@/common/hooks'
+import { changeSearchAC } from '@/app/appSlice.ts'
 
 export const Search = () => {
   const [inputValue, setInputValue] = useState('')
-  const [textSearchin, setTextSearchin] = useState('')
-
-  const [trigger, { data }] = useLazyGetSearchQuery()
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   const handleSearch = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    trigger(inputValue)
-    setTextSearchin(inputValue)
+    dispatch(changeSearchAC(inputValue))
+    navigate(`${Path.SearchPage}`)
     setInputValue('')
   }
 
@@ -21,26 +22,25 @@ export const Search = () => {
   }
 
   return (
-    <div className={s.searchContainer}>
-      <div className={s.formContainer}>
-        <form className={s.form}>
-          <input
-            type="search"
-            onChange={(e) => {
-              handlerInput(e)
-            }}
-            value={inputValue}
-          />
-          <button
-            type="submit"
-            onClick={(e) => {
-              handleSearch(e)
-            }}
-          >
-            Search
-          </button>
-        </form>
-      </div>
+    <div className={s.formContainer}>
+      <form className={s.form}>
+        <input
+          type="search"
+          onChange={(e) => {
+            handlerInput(e)
+          }}
+          value={inputValue}
+        />
+        <button
+          disabled={!inputValue}
+          type="submit"
+          onClick={(e) => {
+            handleSearch(e)
+          }}
+        >
+          Search
+        </button>
+      </form>
     </div>
   )
 }
