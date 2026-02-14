@@ -1,5 +1,5 @@
 import { baseApi } from '@/app/baseApi.ts'
-import type { PopularApi } from '@/features/popular/api/popularApi.types.ts'
+import type { MovieApi, PopularApi } from '@/features/popular/api/popularApi.types.ts'
 import type { categoryType } from '@/common/constants'
 
 export const popularApi = baseApi.injectEndpoints({
@@ -17,7 +17,7 @@ export const popularApi = baseApi.injectEndpoints({
         },
       }),
     }),
-    getDetails: build.query<PopularApi, number>({
+    getDetails: build.query<MovieApi, number>({
       query: (id) => ({
         url: `movie/${id}`,
       }),

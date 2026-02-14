@@ -25,7 +25,13 @@ export const SearchPage = () => {
         {data &&
           (data.results.length ? (
             data.results.map((movie) => (
-              <Card key={movie.id} title={movie.title} poster={movie.poster_path} rating={movie.vote_average} />
+              <Card
+                key={movie.id}
+                title={movie.title}
+                poster={movie.poster_path}
+                rating={movie.vote_average}
+                id={movie.id}
+              />
             ))
           ) : (
             <span>
