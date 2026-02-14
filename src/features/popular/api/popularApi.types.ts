@@ -1,5 +1,3 @@
-import { n, s } from 'vite/dist/node/chunks/moduleRunnerTransport'
-
 export type Results = {
   adult: boolean
   backdrop_path: string

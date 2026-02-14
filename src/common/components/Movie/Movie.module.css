@@ -1,13 +1,43 @@
 .container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 30px auto;
 }
 
 .details {
     display: flex;
+    width: 100%;
 }
 
 .image {
     width: 280px;
     height: 420px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+}
+
+.text {
+    margin: 10px 30px;
+    width: 70%;
+}
+
+.text h2 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.title button {
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+.info {
+    display: flex;
 }
