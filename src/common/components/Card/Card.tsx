@@ -1,6 +1,8 @@
 import { cardUrl, kinopoisk } from '@/common/constants'
 import s from './Card.module.css'
 import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '@/common/hooks'
+import { getMovieIdAC } from '@/app/appSlice.ts'
 
 type Props = {
   poster: string
@@ -18,10 +20,12 @@ const getRatingColor = (voteAverage: number): string => {
 const ratingToFixed = (num: number): string => num.toFixed(1)
 
 export const Card = ({ poster, title, rating, id }: Props) => {
+  const dispatch = useAppDispatch()
   const ratingClass = getRatingColor(rating)
   const navigate = useNavigate()
 
   const onClickHandler = () => {
+    dispatch(getMovieIdAC(id))
     navigate(`${kinopoisk.movie}${id}`)
   }
 

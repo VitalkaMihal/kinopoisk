@@ -17,7 +17,12 @@ export const popularApi = baseApi.injectEndpoints({
         },
       }),
     }),
+    getDetails: build.query<PopularApi, number>({
+      query: (id) => ({
+        url: `movie/${id}`,
+      }),
+    }),
   }),
 })
 
-export const { useGetPopularQuery, useLazyGetSearchQuery } = popularApi
+export const { useGetPopularQuery, useLazyGetSearchQuery, useGetDetailsQuery } = popularApi
