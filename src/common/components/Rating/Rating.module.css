@@ -1,0 +1,24 @@
+/* Стиль для кружка с рейтингом */
+.ratingCircle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Цвета для рейтинга по значению */
+.ratingHigh {
+    background-color: #4caf50; /* зеленый */
+}
+.ratingMedium {
+    background-color: #ff9800; /* оранжевый */
+}
+.ratingLow {
+    background-color: #f44336; /* красный */
+}
