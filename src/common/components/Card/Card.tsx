@@ -17,7 +17,7 @@ export const Card = ({ poster, title, rating, id }: Props) => {
   const navigate = useNavigate()
 
   const onClickHandler = () => {
-    dispatch(getMovieIdAC(id))
+    dispatch(getMovieIdAC({ rating, id }))
     navigate(`${kinopoisk.movie}${id}`)
   }
 

@@ -16,8 +16,8 @@ export const appSlice = createSlice({
     changeSearchAC: create.reducer<string>((state, action) => {
       state.searchText = action.payload
     }),
-    getMovieIdAC: create.reducer<number>((_state, action) => {
-      localStorage.setItem('movieId', JSON.stringify(action.payload))
+    getMovieIdAC: create.reducer<{ rating: number; id: number }>((_state, action) => {
+      localStorage.setItem('movieInfo', JSON.stringify(action.payload))
     }),
   }),
   selectors: {

@@ -39,5 +39,33 @@
 }
 
 .info {
+    font-size: 22px;
     display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.overview {
+    font-size: 20px;
+    line-height: 35px;
+    margin-bottom: 25px;
+
+}
+
+.genresTitle {
+font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.genres {
+    display: flex;
+    gap: 20px;
+}
+
+.genres span {
+    font-size: 20px;
+    background-color: #cccccc;
+    border-radius: 20px;
+    padding: 5px 10px;
 }
