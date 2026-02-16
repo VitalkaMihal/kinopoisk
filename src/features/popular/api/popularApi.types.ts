@@ -72,3 +72,33 @@ export type MovieApi = {
   vote_average: number
   vote_count: number
 }
+
+type Credits = {
+  adult: boolean
+  gender: number
+  id: number
+  known_for_department: string
+  name: string
+  original_name: string
+  popularity: number
+  profile_path: string
+}
+
+type Cast = Credits & {
+  cast_id: number
+  character: string
+  credit_id: string
+  order: number
+}
+
+type Crew = Credits & {
+  credit_id: string
+  department: string
+  job: string
+}
+
+export type CreditsApi = {
+  id: number
+  cast: Cast[]
+  crew: Crew[]
+}

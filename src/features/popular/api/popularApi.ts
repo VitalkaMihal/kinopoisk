@@ -1,5 +1,5 @@
 import { baseApi } from '@/app/baseApi.ts'
-import type { MovieApi, PopularApi } from '@/features/popular/api/popularApi.types.ts'
+import type { CreditsApi, MovieApi, PopularApi } from '@/features/popular/api/popularApi.types.ts'
 import type { categoryType } from '@/common/constants'
 
 export const popularApi = baseApi.injectEndpoints({
@@ -22,7 +22,12 @@ export const popularApi = baseApi.injectEndpoints({
         url: `movie/${id}`,
       }),
     }),
+    getCredits: build.query<CreditsApi, number>({
+      query: (id) => ({
+        url: `movie/${id}/credits`,
+      }),
+    }),
   }),
 })
 
-export const { useGetPopularQuery, useLazyGetSearchQuery, useGetDetailsQuery } = popularApi
+export const { useGetPopularQuery, useLazyGetSearchQuery, useGetDetailsQuery, useGetCreditsQuery } = popularApi

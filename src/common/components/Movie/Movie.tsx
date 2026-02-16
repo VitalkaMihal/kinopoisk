@@ -2,7 +2,7 @@ import { useGetDetailsQuery } from '@/features/popular/api/popularApi.ts'
 import s from './Movie.module.css'
 import { cardUrl } from '@/common/constants'
 import { useNavigate } from 'react-router-dom'
-import { Rating } from '@/common/components'
+import { Credits, Rating } from '@/common/components'
 
 type MovieInfo = {
   rating: number
@@ -19,7 +19,6 @@ export const Movie = () => {
 
   const { data } = useGetDetailsQuery(movieInfo.id)
   if (!data) return
-  console.log(data)
 
   const goBack = () => {
     navigate(-1)
@@ -50,11 +49,12 @@ export const Movie = () => {
           <h3 className={s.genresTitle}>Genres</h3>
           <div className={s.genres}>
             {data.genres.map((genre) => (
-              <span>{genre.name}</span>
+              <span key={genre.id}>{genre.name}</span>
             ))}
           </div>
         </div>
       </div>
+      <Credits id={movieInfo.id} />
     </div>
   )
 }
