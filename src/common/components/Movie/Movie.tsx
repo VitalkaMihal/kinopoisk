@@ -2,7 +2,7 @@ import { useGetDetailsQuery } from '@/features/popular/api/popularApi.ts'
 import s from './Movie.module.css'
 import { cardUrl } from '@/common/constants'
 import { useNavigate } from 'react-router-dom'
-import { Credits, Rating } from '@/common/components'
+import { Credits, Rating, Similar } from '@/common/components'
 
 type MovieInfo = {
   rating: number
@@ -55,6 +55,7 @@ export const Movie = () => {
         </div>
       </div>
       <Credits id={movieInfo.id} />
+      <Similar id={movieInfo.id} />
     </div>
   )
 }
