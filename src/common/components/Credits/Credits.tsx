@@ -15,7 +15,7 @@ export const Credits = ({ id }: Props) => {
       <h2>Cast</h2>
       <div className={s.actors}>
         {data.cast.slice(0, 6).map((actor) => (
-          <div className={s.actor}>
+          <div className={s.actor} key={actor.id}>
             <img src={cardUrl + actor.profile_path} alt={actor.name} />
             <h4>{actor.name}</h4>
             <span>{actor.character}</span>

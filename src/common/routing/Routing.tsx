@@ -4,6 +4,7 @@ import { Category } from '@/features/popular/ui/category'
 import { SearchPage } from '@/features/popular/ui/SearchPage/SearchPage.tsx'
 import { Movie } from '@/common/components'
 import { kinopoisk } from '@/common/constants'
+import { Favorites } from '@/features/Favorites'
 
 export const Path = {
   Main: `${kinopoisk.main}`,
@@ -23,7 +24,14 @@ export const Routing = () => {
       <Route path={Path.Card} element={<Movie />} />
       <Route path={Path.Filtered} element={<h2>Filtered</h2>} />
       <Route path={Path.SearchPage} element={<SearchPage />} />
-      <Route path={Path.Favorites} element={<h2>Favorites</h2>} />
+      <Route
+        path={Path.Favorites}
+        element={
+          <h2>
+            <Favorites />
+          </h2>
+        }
+      />
       <Route path={Path.PageNonFound} element={<h2>404</h2>} />
     </Routes>
   )
