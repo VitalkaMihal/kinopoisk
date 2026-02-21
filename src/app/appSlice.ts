@@ -8,6 +8,8 @@ export type Favorite = {
   id: number
 }
 
+export type ThemeState = 'light' | 'dark'
+
 const favoriteMovies =
   typeof localStorage.getItem('favorites') === 'string'
     ? JSON.parse(localStorage.getItem('favorites') as string)
@@ -17,6 +19,7 @@ const initialState = {
   category: category.POPULAR as categoryType,
   searchText: '' as string,
   favorites: favoriteMovies as Favorite[],
+  theme: 'light' as ThemeState,
 }
 
 export const appSlice = createSlice({
@@ -41,15 +44,25 @@ export const appSlice = createSlice({
       if (index !== -1) state.favorites.splice(index, 1)
       localStorage.setItem('favorites', JSON.stringify(state.favorites))
     }),
+    toggleTheme: create.reducer((state) => {
+      state.theme = state.theme === 'light' ? 'dark' : 'light'
+    }),
   }),
   selectors: {
     selectCategory: (state) => state.category,
     selectSearchText: (state) => state.searchText,
     selectFavorites: (state) => state.favorites,
+    selectTheme: (state) => state.theme,
   },
 })
 
-export const { changeCategoryAC, changeSearchAC, getMovieIdAC, addFavoriteMovieAC, deleteFavoriteMovieAC } =
-  appSlice.actions
+export const {
+  changeCategoryAC,
+  changeSearchAC,
+  getMovieIdAC,
+  addFavoriteMovieAC,
+  deleteFavoriteMovieAC,
+  toggleTheme,
+} = appSlice.actions
 export const appReducer = appSlice.reducer
-export const { selectCategory, selectSearchText, selectFavorites } = appSlice.selectors
+export const { selectCategory, selectSearchText, selectFavorites, selectTheme } = appSlice.selectors

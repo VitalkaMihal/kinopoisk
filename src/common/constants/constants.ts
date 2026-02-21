@@ -1,3 +1,5 @@
+import type { ThemeState } from '@/app/appSlice.ts'
+
 export const bgUrl = 'https://image.tmdb.org/t/p/original'
 export const cardUrl = 'https://image.tmdb.org/t/p/w500'
 
@@ -16,5 +18,10 @@ export const kinopoisk = {
   searchPage: '/kinopoisk/searchPage',
   favorites: '/kinopoisk/favorites',
 } as const
+
+export const themeApp = (theme: ThemeState) => ({
+  '--background-color': theme === 'light' ? '#fff' : '#222',
+  '--text-color': theme === 'light' ? '#000' : '#fff',
+})
 
 export type categoryType = 'now_playing' | 'popular' | 'top_rated' | 'upcoming'

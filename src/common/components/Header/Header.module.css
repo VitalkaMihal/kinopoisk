@@ -1,9 +1,11 @@
+
 .headerWrapper {
     position: sticky;
     top: 0;
     width: 100%;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    background-color: #f5f5f5;
+    background-color: var(--background-color);
+    color: var(--text-color);
     z-index: 100;
 }
 
@@ -71,12 +73,14 @@
 }
 
 .button {
-    border: none;
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
     font-size: 14px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-color: var(--text-color);
 }
 
 .button:hover {
