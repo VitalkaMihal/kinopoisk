@@ -1,41 +1,34 @@
 import s from './FavoriteButton.module.css'
+import { useAppDispatch, useAppSelector } from '@/common/hooks'
+import { addFavoriteMovieAC, deleteFavoriteMovieAC, type Favorite, selectFavorites } from '@/app/appSlice.ts'
 
 type Props = {
-  // poster: string
-  // title: string
-  // rating: number
-  // id: number
-  isFavorite: boolean
+  poster: string
+  title: string
+  rating: number
+  id: number
 }
 
-// type Favorites = Props[]
+export const FavoriteButton = ({ poster, title, rating, id }: Props) => {
+  const dispatch = useAppDispatch()
 
-export const FavoriteButton = ({ isFavorite }: Props) => {
-  // const [isFavorite, setIsFavorite] = useState<boolean>(false)
-  // const favorites: Favorites = localStorage.getItem('favorites')
-  //   ? JSON.parse(localStorage.getItem('favorites'))
-  //   : ([] as Favorites)
-  //
-  // const index = favorites.findIndex((movie) => movie.id === id)
+  const favorites = useAppSelector(selectFavorites)
+  const isFavorite = favorites?.length > 0 ? Boolean(favorites.find((favorite: Favorite) => favorite.id === id)) : false
 
-  const favoriteColor = isFavorite ? 'red' : 'green'
-  const changeFavorite = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const changeFavoriteHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation()
+    if (!isFavorite) {
+      dispatch(addFavoriteMovieAC({ poster, title, rating, id }))
+    } else {
+      dispatch(deleteFavoriteMovieAC({ poster, title, rating, id }))
+    }
   }
-  //   event.stopPropagation()
-  //   if (index !== -1) {
-  //     setIsFavorite(false)
-  //     favorites.splice(index, 1)
-  //   } else {
-  //     setIsFavorite(true)
-  //     favorites.push({ poster, title, rating, id })
-  //   }
-  //   localStorage.setItem('favorites', JSON.stringify(favorites))
-  // }
+  const favoriteColor = isFavorite ? 'red' : 'yellow'
+
   const className = isFavorite ? `${s.favorite} ${s.isFavoriteClass}` : s.favorite
 
   return (
-    <div className={className}>
+    <div className={className} onClick={changeFavoriteHandler}>
       <svg width="24" height="24" viewBox="0 0 24 24" fill={favoriteColor} xmlns="http://www.w3.org/2000/svg">
         <path
           d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42
