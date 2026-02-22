@@ -11,7 +11,7 @@ const getRatingColor = (voteAverage: number): string => {
 }
 
 export const Rating = ({ rating }: Props) => {
-  const ratingToFixed = rating.toFixed(1)
+  const ratingToFixed = rating?.toFixed(1)
   const ratingClass = getRatingColor(rating)
 
   return <div className={`${s.ratingCircle} ${ratingClass}`}>{ratingToFixed}</div>

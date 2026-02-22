@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Main } from '@/features/popular/ui/Main.tsx'
 import { Category } from '@/features/popular/ui/category'
 import { SearchPage } from '@/features/popular/ui/SearchPage/SearchPage.tsx'
-import { Movie } from '@/common/components'
+import { FilterAndSort, Movie } from '@/common/components'
 import { kinopoisk } from '@/common/constants'
 import { Favorites } from '@/features/Favorites'
 
@@ -23,7 +23,14 @@ export const Routing = () => {
       <Route path={Path.Main} element={<Main />} />
       <Route path={Path.Category} element={<Category />} />
       <Route path={Path.Card} element={<Movie />} />
-      <Route path={Path.Filtered} element={<h2>Filtered</h2>} />
+      <Route
+        path={Path.Filtered}
+        element={
+          <h2>
+            <FilterAndSort />
+          </h2>
+        }
+      />
       <Route path={Path.SearchPage} element={<SearchPage />} />
       <Route
         path={Path.Favorites}

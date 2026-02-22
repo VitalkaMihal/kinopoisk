@@ -1,5 +1,5 @@
 import { baseApi } from '@/app/baseApi.ts'
-import type { CreditsApi, MovieApi, PopularApi } from '@/features/popular/api/popularApi.types.ts'
+import type { CreditsApi, MovieApi, PopularApi, SortAndFilterParams } from '@/features/popular/api/popularApi.types.ts'
 import type { categoryType } from '@/common/constants'
 
 export const popularApi = baseApi.injectEndpoints({
@@ -14,6 +14,14 @@ export const popularApi = baseApi.injectEndpoints({
         url: `/search/movie`,
         params: {
           query: search,
+        },
+      }),
+    }),
+    getSortAndFilter: build.query<PopularApi, SortAndFilterParams>({
+      query: (params) => ({
+        url: `/discover/movie`,
+        params: {
+          ...params,
         },
       }),
     }),
@@ -35,5 +43,11 @@ export const popularApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useGetPopularQuery, useLazyGetSearchQuery, useGetDetailsQuery, useGetCreditsQuery, useGetSimilarQuery } =
-  popularApi
+export const {
+  useGetPopularQuery,
+  useLazyGetSearchQuery,
+  useGetDetailsQuery,
+  useGetCreditsQuery,
+  useGetSimilarQuery,
+  useGetSortAndFilterQuery,
+} = popularApi

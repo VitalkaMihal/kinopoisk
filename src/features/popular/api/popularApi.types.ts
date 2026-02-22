@@ -102,3 +102,8 @@ export type CreditsApi = {
   cast: Cast[]
   crew: Crew[]
 }
+
+export type SortAndFilterParams = {
+  sort_by?: string
+  with_genres?: number[]
+}

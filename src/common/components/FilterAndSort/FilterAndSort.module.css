@@ -1,0 +1,66 @@
+.filterAndSort {
+    max-width: 1200px;
+    margin: 30px auto;
+    display: flex;
+}
+
+.sortContainer {
+    width: 28%;
+}
+
+.sortContainer h3 {
+    font-size: 36px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.sortFilterMenu {
+    padding: 10px;
+    width: 95%;
+    height: 100%;
+    border-radius: 30px;
+    background-color: var(--header-color);
+}
+
+.sortMenu {
+    margin: 20px 10px;
+    font-size: 24px;
+}
+
+.select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.genresContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.buttons {
+    border-radius: 20px;
+}
+
+.buttons:hover {
+    opacity: 0.8;
+}
+
+.isActive {
+    border-radius: 20px;
+    background-color: blue;
+    color: white;
+}
+.isActive:hover {
+    opacity: 0.8;
+    background-color: blue;
+    color: white;
+}
+.resultsContainer {
+    width: 68%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
