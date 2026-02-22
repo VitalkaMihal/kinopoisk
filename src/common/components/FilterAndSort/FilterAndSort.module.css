@@ -15,7 +15,6 @@
 }
 
 .sortFilterMenu {
-    padding: 10px;
     width: 95%;
     height: 100%;
     border-radius: 30px;
@@ -25,6 +24,7 @@
 .sortMenu {
     margin: 20px 10px;
     font-size: 24px;
+    padding-top: 10px;
 }
 
 .select {
@@ -37,11 +37,12 @@
 .genresContainer {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 10px;
 }
 
 .buttons {
     border-radius: 20px;
+    margin: 0;
 }
 
 .buttons:hover {
@@ -52,6 +53,7 @@
     border-radius: 20px;
     background-color: blue;
     color: white;
+    margin: 0;
 }
 .isActive:hover {
     opacity: 0.8;
