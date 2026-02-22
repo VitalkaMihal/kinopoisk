@@ -9,6 +9,7 @@ import { Favorites } from '@/features/Favorites'
 export const Path = {
   Main: `${kinopoisk.main}`,
   Category: `${kinopoisk.category}:categoryName`,
+  CategoryActive: `${kinopoisk.category}`,
   Card: `${kinopoisk.movie}:cardName`,
   Filtered: `${kinopoisk.filtered}`,
   SearchPage: `${kinopoisk.searchPage}`,

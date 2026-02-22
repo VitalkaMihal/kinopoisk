@@ -10,6 +10,9 @@ export type Favorite = {
 
 export type ThemeState = 'light' | 'dark'
 
+const theme: ThemeState =
+  typeof localStorage.getItem('theme') === 'string' ? (localStorage.getItem('theme') as ThemeState) : 'light'
+
 const favoriteMovies =
   typeof localStorage.getItem('favorites') === 'string'
     ? JSON.parse(localStorage.getItem('favorites') as string)
@@ -19,7 +22,7 @@ const initialState = {
   category: category.POPULAR as categoryType,
   searchText: '' as string,
   favorites: favoriteMovies as Favorite[],
-  theme: 'light' as ThemeState,
+  theme,
 }
 
 export const appSlice = createSlice({
@@ -46,6 +49,7 @@ export const appSlice = createSlice({
     }),
     toggleTheme: create.reducer((state) => {
       state.theme = state.theme === 'light' ? 'dark' : 'light'
+      localStorage.setItem('theme', state.theme)
     }),
   }),
   selectors: {

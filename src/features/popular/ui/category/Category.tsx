@@ -1,16 +1,18 @@
 import { useGetPopularQuery } from '@/features/popular/api/popularApi.ts'
-import { category, type categoryType, kinopoisk } from '@/common/constants'
+import { category, type categoryType, kinopoisk, themeApp } from '@/common/constants'
 import s from './Category.module.css'
-import { changeCategoryAC, selectCategory } from '@/app/appSlice.ts'
+import { changeCategoryAC, selectCategory, selectTheme } from '@/app/appSlice.ts'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Card } from '@/common/components'
+import React from 'react'
 
 export const Category = () => {
   const categoryStore = useAppSelector(selectCategory)
-
+  const theme = useAppSelector(selectTheme)
+  const style = themeApp(theme)
+  const location = useLocation()
   const dispatch = useAppDispatch()
-
   const navigate = useNavigate()
 
   const { data } = useGetPopularQuery(categoryStore)
@@ -24,13 +26,27 @@ export const Category = () => {
     return
   }
 
+  const className = (cat: categoryType) => {
+    if (location.pathname.endsWith(cat)) {
+      return s.active
+    }
+  }
+
   return (
-    <div className={s.container}>
+    <div className={s.container} style={style as React.CSSProperties}>
       <div className={s.buttonsWrapper}>
-        <button onClick={() => getCategoryMoviesHandler(category.POPULAR)}>Popular Movies</button>
-        <button onClick={() => getCategoryMoviesHandler(category.TOP)}>Top Rated Movies</button>
-        <button onClick={() => getCategoryMoviesHandler(category.UPCOMING)}>Upcoming Movies</button>
-        <button onClick={() => getCategoryMoviesHandler(category.NOW)}>Now Playing Movies</button>
+        <button className={className(category.POPULAR)} onClick={() => getCategoryMoviesHandler(category.POPULAR)}>
+          Popular Movies
+        </button>
+        <button className={className(category.TOP)} onClick={() => getCategoryMoviesHandler(category.TOP)}>
+          Top Rated Movies
+        </button>
+        <button className={className(category.UPCOMING)} onClick={() => getCategoryMoviesHandler(category.UPCOMING)}>
+          Upcoming Movies
+        </button>
+        <button className={className(category.NOW)} onClick={() => getCategoryMoviesHandler(category.NOW)}>
+          Now Playing Movies
+        </button>
       </div>
       <div className={s.moviesGrid}>
         {data.results.map((movie) => (

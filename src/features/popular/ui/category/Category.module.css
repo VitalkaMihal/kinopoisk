@@ -12,24 +12,31 @@
 }
 
 button {
+    margin: 15px;
     padding: 10px 20px;
-    background-color: transparent;
-    border: 2px solid #ffffff80;
+    border: 2px solid var(--text-color);
     border-radius: 4px;
-    color: #fff;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.active {
+    border: 2px solid red;
+    color: red;
 }
 
 button:hover {
-    background-color: #ffffff10;
-    border-color: #fff;
+    opacity: 0.7;
+    background-color: var(--background-color);
+    border-color: var(--text-color);
 }
 
 .moviesGrid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
 
 }

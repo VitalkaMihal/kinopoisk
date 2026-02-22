@@ -22,6 +22,7 @@ export const kinopoisk = {
 export const themeApp = (theme: ThemeState) => ({
   '--background-color': theme === 'light' ? '#fff' : '#222',
   '--text-color': theme === 'light' ? '#000' : '#fff',
+  '--header-color': theme === 'light' ? '#d5c9c9' : '#1b1a1a',
 })
 
 export type categoryType = 'now_playing' | 'popular' | 'top_rated' | 'upcoming'

@@ -1,9 +1,9 @@
 import React from 'react'
-import styles from './Header.module.css'
+import s from './Header.module.css'
 import kinopoiskLogo from '@/assets/logo/kinopoisk-logo.svg'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
 import { Path } from '@/common/routing'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { category, kinopoisk, themeApp } from '@/common/constants'
 import { changeSearchAC, selectTheme, toggleTheme } from '@/app/appSlice.ts'
 
@@ -23,36 +23,53 @@ export const Header = () => {
   const searghPageHandler = () => dispatch(changeSearchAC(''))
 
   return (
-    <div style={style as React.CSSProperties} className={styles.headerWrapper}>
-      <div className={styles.headerContainer}>
+    <div style={style as React.CSSProperties} className={s.headerWrapper}>
+      <div className={s.headerContainer}>
         <Link to={Path.Main} onClick={() => window.scrollTo(0, 0)}>
-          <img src={kinopoiskLogo} alt="logo" className={styles.logo} />
+          <img src={kinopoiskLogo} alt="logo" className={s.logo} />
         </Link>
-        <nav className={styles.nav}>
-          <Link to={Path.Main} className={styles.link} onClick={() => window.scrollTo(0, 0)}>
+        <nav className={s.nav}>
+          <NavLink
+            to={Path.Main}
+            end
+            className={({ isActive }) => (isActive ? s.isActive : s.link)}
+            onClick={() => window.scrollTo(0, 0)}
+          >
             Main
-          </Link>
-          <Link to={Path.Category} onClick={(e) => navigateHandler(e)} className={styles.link}>
+          </NavLink>
+          <NavLink
+            to={Path.CategoryActive}
+            onClick={(e) => navigateHandler(e)}
+            className={({ isActive }) => (isActive ? s.isActive : s.link)}
+          >
             Category Movies
-          </Link>
-          <Link to={Path.Filtered} className={styles.link}>
+          </NavLink>
+          <NavLink to={Path.Filtered} className={({ isActive }) => (isActive ? s.isActive : s.link)}>
             Filtered Movies
-          </Link>
-          <Link to={Path.SearchPage} className={styles.link} onClick={searghPageHandler}>
+          </NavLink>
+          <NavLink
+            to={Path.SearchPage}
+            className={({ isActive }) => (isActive ? s.isActive : s.link)}
+            onClick={searghPageHandler}
+          >
             Search
-          </Link>
+          </NavLink>
 
-          <Link to={Path.Favorites} onClick={() => window.scrollTo(0, 0)} className={styles.link}>
+          <NavLink
+            to={Path.Favorites}
+            onClick={() => window.scrollTo(0, 0)}
+            className={({ isActive }) => (isActive ? s.isActive : s.link)}
+          >
             Favorites
-          </Link>
+          </NavLink>
         </nav>
         <button
           onClick={() => {
             dispatch(toggleTheme())
           }}
-          className={styles.button}
+          className={s.button}
         >
-          nite
+          {theme === 'dark' ? 'light' : 'dark'}
         </button>
       </div>
     </div>

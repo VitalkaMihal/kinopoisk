@@ -4,7 +4,7 @@
     top: 0;
     width: 100%;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    background-color: var(--background-color);
+    background-color: var(--header-color);
     color: var(--text-color);
     z-index: 100;
 }
@@ -36,7 +36,12 @@
 
 .link {
     text-decoration: none;
-    color: inherit;
+    color: var(--text-color);
+}
+
+.isActive {
+    text-decoration: none;
+    color: #1754ef;
 }
 /* при узкой ширине, например максимум 768px, меняем расположение */
 @media (max-width: 768px) {
@@ -78,12 +83,13 @@
     cursor: pointer;
     font-weight: 600;
     font-size: 14px;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    border-color: var(--text-color);
+    background-color: var(--text-color);
+    color: var(--background-color);
 }
 
 .button:hover {
-    opacity: 0.7;
+    opacity: 0.8;
     transition: opacity 0.3s;
+    background-color: var(--text-color);
+    color: var(--background-color);
 }
