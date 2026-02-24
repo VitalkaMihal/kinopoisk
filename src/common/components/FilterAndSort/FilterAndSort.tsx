@@ -6,6 +6,8 @@ import s from './FilterAndSort.module.css'
 import { useAppSelector } from '@/common/hooks'
 import { selectTheme } from '@/app/appSlice.ts'
 import { themeApp, genresForFilter } from '@/common/constants'
+import Slider from 'rc-slider'
+import 'rc-slider/assets/index.css'
 
 export const FilterAndSort = () => {
   const theme = useAppSelector(selectTheme)
@@ -22,9 +24,17 @@ export const FilterAndSort = () => {
     { value: 'primary_release_date.asc', label: 'Release date ↑' },
   ]
 
-  const [sort, setSort] = useState<SortAndFilterParams>({ sort_by: options[0].value })
+  const [sort, setSort] = useState<{ sort_by: string }>({ sort_by: options[0].value })
 
   const [genres, setGenres] = useState<number[]>([])
+
+  const [ratingRange, setRatingRange] = useState<number[]>([0, 10])
+
+  const handleChangeRating = (values: number | number[]) => {
+    if (Array.isArray(values)) {
+      setRatingRange([values[0], values[1]])
+    }
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSort({ sort_by: event.target.value })
@@ -37,9 +47,15 @@ export const FilterAndSort = () => {
   const resetHandler = () => {
     setGenres([])
     setSort({ sort_by: options[0].value })
+    setRatingRange([0, 10])
   }
 
-  const sortAndGenre = { ...sort, with_genres: genres }
+  const sortAndGenre: SortAndFilterParams = {
+    ...sort,
+    with_genres: genres,
+    'vote_average.gte': ratingRange[0],
+    'vote_average.lte': ratingRange[1],
+  }
 
   const { data } = useGetSortAndFilterQuery(sortAndGenre)
 
@@ -60,6 +76,25 @@ export const FilterAndSort = () => {
                 </option>
               ))}
             </select>
+          </div>
+          <div className={s.sliderContainer}>
+            <h4>
+              Рейтинг: {ratingRange[0]} - {ratingRange[1]}
+            </h4>
+            <Slider
+              range
+              min={0}
+              max={10}
+              step={0.1}
+              allowCross={false}
+              value={ratingRange}
+              onChange={handleChangeRating}
+              styles={{
+                track: { backgroundColor: 'blue', height: 8 },
+                rail: { backgroundColor: 'white', height: 8 },
+                handle: { backgroundColor: 'blue', height: 17, borderColor: 'blue', opacity: 1 },
+              }}
+            />
           </div>
           <h3>Genres</h3>
           <div className={s.genresContainer}>

@@ -106,4 +106,6 @@ export type CreditsApi = {
 export type SortAndFilterParams = {
   sort_by?: string
   with_genres?: number[]
+  'vote_average.gte'?: number
+  'vote_average.lte'?: number
 }

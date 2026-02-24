@@ -72,3 +72,13 @@
     background-color: blue;
     margin: 20px;
 }
+
+.sliderContainer {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.sliderContainer h4 {
+    margin: 10px 0;
+    font-size: 20px;
+}
