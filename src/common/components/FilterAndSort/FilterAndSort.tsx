@@ -34,6 +34,11 @@ export const FilterAndSort = () => {
     setGenres(genres.includes(id) ? [...genres.filter((genre) => genre !== id)] : [...genres, id])
   }
 
+  const resetHandler = () => {
+    setGenres([])
+    setSort({ sort_by: options[0].value })
+  }
+
   const sortAndGenre = { ...sort, with_genres: genres }
 
   const { data } = useGetSortAndFilterQuery(sortAndGenre)
@@ -48,7 +53,7 @@ export const FilterAndSort = () => {
         <div className={s.sortFilterMenu}>
           <div className={s.sortMenu}>
             <h4>Sort By</h4>
-            <select className={s.select} onChange={handleChange}>
+            <select className={s.select} onChange={handleChange} value={sort.sort_by}>
               {options.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
@@ -66,7 +71,10 @@ export const FilterAndSort = () => {
                 </button>
               )
             })}
-          </div>
+          </div>{' '}
+          <button className={s.reset} onClick={resetHandler}>
+            Reset filters
+          </button>
         </div>
       </div>
       <div className={s.resultsContainer}>

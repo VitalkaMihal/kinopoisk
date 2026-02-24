@@ -1,6 +1,6 @@
 .filterAndSort {
     max-width: 1200px;
-    margin: 30px auto;
+    margin: 30px auto 30px ;
     display: flex;
 }
 
@@ -11,7 +11,6 @@
 .sortContainer h3 {
     font-size: 36px;
     text-align: center;
-    margin: 20px 0;
 }
 
 .sortFilterMenu {
@@ -38,6 +37,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    padding: 10px;
 }
 
 .buttons {
@@ -65,4 +65,10 @@
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
+}
+
+.reset {
+    color: white;
+    background-color: blue;
+    margin: 20px;
 }
