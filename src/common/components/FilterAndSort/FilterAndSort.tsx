@@ -3,7 +3,7 @@ import { Card } from '@/common/components'
 import React, { useState } from 'react'
 import type { SortAndFilterParams } from '@/features/popular/api/popularApi.types.ts'
 import s from './FilterAndSort.module.css'
-import { useAppSelector } from '@/common/hooks'
+import { useAppSelector, useDebounce } from '@/common/hooks'
 import { selectTheme } from '@/app/appSlice.ts'
 import { themeApp, genresForFilter } from '@/common/constants'
 import Slider from 'rc-slider'
@@ -50,12 +50,15 @@ export const FilterAndSort = () => {
     setRatingRange([0, 10])
   }
 
-  const sortAndGenre: SortAndFilterParams = {
-    ...sort,
-    with_genres: genres,
-    'vote_average.gte': ratingRange[0],
-    'vote_average.lte': ratingRange[1],
-  }
+  const sortAndGenre: SortAndFilterParams = useDebounce(
+    {
+      ...sort,
+      with_genres: genres,
+      'vote_average.gte': ratingRange[0],
+      'vote_average.lte': ratingRange[1],
+    },
+    500,
+  )
 
   const { data } = useGetSortAndFilterQuery(sortAndGenre)
 
