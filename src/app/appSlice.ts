@@ -18,8 +18,12 @@ const favoriteMovies =
     ? JSON.parse(localStorage.getItem('favorites') as string)
     : ([] as Favorite[])
 
+const categoryFromStorage = localStorage.getItem('category')?.replace(/"/g, '')
+
+const categoryValue = categoryFromStorage ? categoryFromStorage : category.POPULAR
+
 const initialState = {
-  category: category.POPULAR as categoryType,
+  category: categoryValue as categoryType,
   searchText: '' as string,
   favorites: favoriteMovies as Favorite[],
   theme,
@@ -31,6 +35,7 @@ export const appSlice = createSlice({
   reducers: (create) => ({
     changeCategoryAC: create.reducer<categoryType>((state, action) => {
       state.category = action.payload
+      localStorage.setItem('category', JSON.stringify(action.payload))
     }),
     changeSearchAC: create.reducer<string>((state, action) => {
       state.searchText = action.payload

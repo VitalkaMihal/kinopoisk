@@ -18,6 +18,10 @@ export const Card = ({ poster, title, rating, id }: Props) => {
   const favorites = useAppSelector(selectFavorites)
   const isFavorite = favorites?.length > 0 ? Boolean(favorites.find((favorite: Favorite) => favorite.id === id)) : false
 
+  const backgroundImage = poster
+    ? `url(${cardUrl + poster})`
+    : `url(https://placehold.co/180x270/transparent/FOO/png?text=NO+IMAGE)`
+
   const onClickHandler = () => {
     dispatch(getMovieIdAC({ rating, id }))
     navigate(`${kinopoisk.movie}${id}`)
@@ -30,7 +34,7 @@ export const Card = ({ poster, title, rating, id }: Props) => {
       onClick={onClickHandler}
       className={s.card}
       style={{
-        backgroundImage: `url(${cardUrl + poster})`,
+        backgroundImage,
       }}
     >
       <div className={s.ratingPosition}>

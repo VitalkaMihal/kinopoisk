@@ -1,12 +1,20 @@
 import { baseApi } from '@/app/baseApi.ts'
 import type { CreditsApi, MovieApi, PopularApi, SortAndFilterParams } from '@/features/popular/api/popularApi.types.ts'
-import type { categoryType } from '@/common/constants'
+import { type categoryType } from '@/common/constants'
+
+type Category = {
+  category: categoryType
+  pageNumber: number
+}
 
 export const popularApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getPopular: build.query<PopularApi, categoryType>({
-      query: (category) => ({
+    getPopular: build.query<PopularApi, Category>({
+      query: ({ category, pageNumber }) => ({
         url: `/movie/${category}`,
+        params: {
+          page: pageNumber,
+        },
       }),
     }),
     getSearch: build.query<PopularApi, string>({

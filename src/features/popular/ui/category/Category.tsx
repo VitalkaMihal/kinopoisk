@@ -4,26 +4,29 @@ import s from './Category.module.css'
 import { changeCategoryAC, selectCategory, selectTheme } from '@/app/appSlice.ts'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Card } from '@/common/components'
-import React from 'react'
+import { Card, Pagination } from '@/common/components'
+import React, { useState } from 'react'
 
 export const Category = () => {
-  const categoryStore = useAppSelector(selectCategory)
+  const [currentPage, setCurrentPage] = useState(1)
+  const categoryStore = encodeURIComponent(useAppSelector(selectCategory))
   const theme = useAppSelector(selectTheme)
   const style = themeApp(theme)
   const location = useLocation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const { data } = useGetPopularQuery(categoryStore)
+  const { data } = useGetPopularQuery({ category: categoryStore, pageNumber: currentPage })
+
+  if (!data) {
+    return
+  }
+
+  const pagesCount = data?.total_pages < 500 ? data?.total_pages : 500
 
   const getCategoryMoviesHandler = (filmCategory: categoryType) => {
     dispatch(changeCategoryAC(filmCategory))
     navigate(`${kinopoisk.category}${filmCategory}`)
-  }
-
-  if (!data) {
-    return
   }
 
   const className = (cat: categoryType) => {
@@ -48,6 +51,10 @@ export const Category = () => {
           Now Playing Movies
         </button>
       </div>
+      <h3>{categoryStore}</h3>
+      <div className={s.pagination}>
+        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
+      </div>
       <div className={s.moviesGrid}>
         {data.results.map((movie) => (
           <Card
@@ -58,6 +65,9 @@ export const Category = () => {
             id={movie.id}
           />
         ))}
+      </div>
+      <div className={s.pagination}>
+        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
       </div>
     </div>
   )

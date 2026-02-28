@@ -12,7 +12,7 @@ type Props = {
 }
 
 export const PreviewCategory = ({ previewCategory, titleCategory }: Props) => {
-  const { data } = useGetPopularQuery(previewCategory)
+  const { data } = useGetPopularQuery({ category: previewCategory, pageNumber: 1 })
   const navigate = useNavigate()
 
   const dispatch = useAppDispatch()

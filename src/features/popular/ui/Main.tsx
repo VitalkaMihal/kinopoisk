@@ -7,7 +7,7 @@ import { Search } from '@/common/components'
 const random = Math.ceil(Math.random() * 6)
 
 export const Main = () => {
-  const { data } = useGetPopularQuery(category.POPULAR)
+  const { data } = useGetPopularQuery({ category: category.POPULAR, pageNumber: 1 })
 
   const bgUrlRandom = data?.results[random].backdrop_path
   return (

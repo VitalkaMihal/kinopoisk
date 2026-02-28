@@ -15,7 +15,6 @@
 
 .sortFilterMenu {
     width: 95%;
-    height: 100%;
     border-radius: 30px;
     background-color: var(--header-color);
 }
