@@ -18,9 +18,9 @@ const favoriteMovies =
     ? JSON.parse(localStorage.getItem('favorites') as string)
     : ([] as Favorite[])
 
-const categoryFromStorage = localStorage.getItem('category')?.replace(/"/g, '')
+const categoryFromStorage = JSON.parse(localStorage.getItem('category') as string)
 
-const categoryValue = categoryFromStorage ? categoryFromStorage : category.POPULAR
+const categoryValue = (categoryFromStorage ? categoryFromStorage : category.POPULAR) as categoryType
 
 const initialState = {
   category: categoryValue as categoryType,

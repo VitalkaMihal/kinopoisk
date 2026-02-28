@@ -1,15 +1,16 @@
 import { useGetSortAndFilterQuery } from '@/features/popular/api/popularApi.ts'
-import { Card } from '@/common/components'
+import { Card, Pagination } from '@/common/components'
 import React, { useState } from 'react'
 import type { SortAndFilterParams } from '@/features/popular/api/popularApi.types.ts'
 import s from './FilterAndSort.module.css'
 import { useAppSelector, useDebounce } from '@/common/hooks'
 import { selectTheme } from '@/app/appSlice.ts'
-import { themeApp, genresForFilter } from '@/common/constants'
+import { genresForFilter, themeApp } from '@/common/constants'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 
 export const FilterAndSort = () => {
+  const [currentPage, setCurrentPage] = useState(1)
   const theme = useAppSelector(selectTheme)
   const style = themeApp(theme)
 
@@ -56,6 +57,7 @@ export const FilterAndSort = () => {
       with_genres: genres,
       'vote_average.gte': ratingRange[0],
       'vote_average.lte': ratingRange[1],
+      page: currentPage,
     },
     500,
   )
@@ -65,6 +67,9 @@ export const FilterAndSort = () => {
   if (!data) {
     return
   }
+
+  const pagesCount = data?.total_pages < 500 ? data?.total_pages : 500
+
   return (
     <div style={style as React.CSSProperties} className={s.filterAndSort}>
       <div className={s.sortContainer}>
@@ -116,15 +121,23 @@ export const FilterAndSort = () => {
         </div>
       </div>
       <div className={s.resultsContainer}>
-        {data.results.map((movie) => (
-          <Card
-            key={movie.id}
-            title={movie.title}
-            poster={movie.poster_path}
-            rating={movie.vote_average}
-            id={movie.id}
-          />
-        ))}
+        <div className={s.pagination}>
+          <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
+        </div>
+        <div className={s.cards}>
+          {data.results.map((movie) => (
+            <Card
+              key={movie.id}
+              title={movie.title}
+              poster={movie.poster_path}
+              rating={movie.vote_average}
+              id={movie.id}
+            />
+          ))}
+        </div>
+        <div className={s.pagination}>
+          <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
+        </div>
       </div>
     </div>
   )

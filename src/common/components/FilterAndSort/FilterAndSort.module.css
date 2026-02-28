@@ -61,9 +61,6 @@
 }
 .resultsContainer {
     width: 68%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
 }
 
 .reset {
@@ -80,4 +77,16 @@
 .sliderContainer h4 {
     margin: 10px 0;
     font-size: 20px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
 }

@@ -9,7 +9,7 @@ import React, { useState } from 'react'
 
 export const Category = () => {
   const [currentPage, setCurrentPage] = useState(1)
-  const categoryStore = encodeURIComponent(useAppSelector(selectCategory))
+  const categoryStore = useAppSelector(selectCategory)
   const theme = useAppSelector(selectTheme)
   const style = themeApp(theme)
   const location = useLocation()

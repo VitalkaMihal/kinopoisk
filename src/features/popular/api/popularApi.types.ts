@@ -108,4 +108,5 @@ export type SortAndFilterParams = {
   with_genres?: number[]
   'vote_average.gte'?: number
   'vote_average.lte'?: number
+  page: number
 }
