@@ -1,5 +1,9 @@
 import { getPaginationPages } from '@/common/utils'
 import s from './Pagination.module.css'
+import { useAppSelector } from '@/common/hooks'
+import { selectTheme } from '@/app/appSlice.ts'
+import { themeApp } from '@/common/constants'
+import React from 'react'
 
 type Props = {
   currentPage: number
@@ -8,12 +12,14 @@ type Props = {
 }
 
 export const Pagination = ({ currentPage, setCurrentPage, pagesCount }: Props) => {
-  if (pagesCount <= 1) return null
+  const theme = useAppSelector(selectTheme)
+  const style = themeApp(theme)
+  if (pagesCount <= 1) return
 
   const pages = getPaginationPages(currentPage, pagesCount)
 
   return (
-    <div className={s.container}>
+    <div style={style as React.CSSProperties} className={s.container}>
       <div className={s.pagination}>
         {pages.map((page, idx) =>
           page === '...' ? (

@@ -1,7 +1,5 @@
 .container {
     display: flex;
-    align-content: center;
-    align-items: center;
     margin: 0 auto;
     gap: 40px;
 }
@@ -10,18 +8,20 @@
     display: flex;
     gap: 8px;
     justify-content: center;
+    align-items: center;
 }
 
 .pageButton {
     padding: 4px 10px;
-    background: white;
-    border: 1px solid #aaa;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    border: 1px solid var(--text-color);
     border-radius: 4px;
     cursor: pointer;
 }
 
 .pageButtonActive {
-    background: #ececec;
+    background: #8f7a7a;
     cursor: default;
 }
 
