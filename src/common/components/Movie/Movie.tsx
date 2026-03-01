@@ -19,7 +19,9 @@ export const Movie = () => {
 
   const { data } = useGetDetailsQuery(movieInfo.id)
   if (!data) return
-
+  const backgroundImage = data?.poster_path
+    ? `url(${cardUrl + data?.poster_path})`
+    : `url(https://placehold.co/280x420/transparent/FOO/png?text=NO+IMAGE)`
   const goBack = () => {
     navigate(-1)
   }
@@ -32,7 +34,7 @@ export const Movie = () => {
         <div
           className={s.image}
           style={{
-            backgroundImage: `url(${cardUrl + data?.poster_path})`,
+            backgroundImage: backgroundImage,
           }}
         ></div>
         <div className={s.text}>

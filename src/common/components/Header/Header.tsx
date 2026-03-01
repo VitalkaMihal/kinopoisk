@@ -20,12 +20,16 @@ export const Header = () => {
     window.scrollTo(0, 0)
   }
 
-  const searghPageHandler = () => dispatch(changeSearchAC(''))
-
   return (
     <div style={style as React.CSSProperties} className={s.headerWrapper}>
       <div className={s.headerContainer}>
-        <Link to={Path.Main} onClick={() => window.scrollTo(0, 0)}>
+        <Link
+          to={Path.Main}
+          onClick={() => {
+            window.scrollTo(0, 0)
+            dispatch(changeSearchAC(''))
+          }}
+        >
           <img src={kinopoiskLogo} alt="logo" className={s.logo} />
         </Link>
         <nav className={s.nav}>
@@ -33,7 +37,10 @@ export const Header = () => {
             to={Path.Main}
             end
             className={({ isActive }) => (isActive ? s.isActive : s.link)}
-            onClick={() => window.scrollTo(0, 0)}
+            onClick={() => {
+              window.scrollTo(0, 0)
+              dispatch(changeSearchAC(''))
+            }}
           >
             Main
           </NavLink>
@@ -50,7 +57,9 @@ export const Header = () => {
           <NavLink
             to={Path.SearchPage}
             className={({ isActive }) => (isActive ? s.isActive : s.link)}
-            onClick={searghPageHandler}
+            onClick={() => {
+              dispatch(changeSearchAC(''))
+            }}
           >
             Search
           </NavLink>

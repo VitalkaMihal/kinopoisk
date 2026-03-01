@@ -1,24 +1,31 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import s from './Search.module.css'
 import { useNavigate } from 'react-router-dom'
 import { Path } from '@/common/routing'
-import { useAppDispatch } from '@/common/hooks'
-import { changeSearchAC } from '@/app/appSlice.ts'
+import { useAppDispatch, useAppSelector } from '@/common/hooks'
+import { changeSearchAC, selectSearchText } from '@/app/appSlice.ts'
 
 export const Search = () => {
-  const [inputValue, setInputValue] = useState('')
+  const searchingText = useAppSelector(selectSearchText)
+  const [inputValue, setInputValue] = useState(searchingText)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    setInputValue(searchingText)
+  }, [searchingText])
 
   const handleSearch = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     dispatch(changeSearchAC(inputValue))
     navigate(`${Path.SearchPage}`)
-    setInputValue('')
   }
 
   const handlerInput = (value: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(value.currentTarget.value)
+    if (value.currentTarget.value === '') {
+      dispatch(changeSearchAC(''))
+    }
   }
 
   return (

@@ -16,7 +16,14 @@ export const Credits = ({ id }: Props) => {
       <div className={s.actors}>
         {data.cast.slice(0, 6).map((actor) => (
           <div className={s.actor} key={actor.id}>
-            <img src={cardUrl + actor.profile_path} alt={actor.name} />
+            <img
+              src={
+                actor.profile_path
+                  ? cardUrl + actor.profile_path
+                  : `https://placehold.co/150x150/transparent/FOO/png?text=NO+IMAGE`
+              }
+              alt={actor.name}
+            />
             <h4>{actor.name}</h4>
             <span>{actor.character}</span>
           </div>

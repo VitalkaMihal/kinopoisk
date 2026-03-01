@@ -55,3 +55,8 @@
     font-weight: normal;
 
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}

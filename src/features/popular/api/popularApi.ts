@@ -7,6 +7,11 @@ type Category = {
   pageNumber: number
 }
 
+type Search = {
+  search: string
+  pageNumber: number
+}
+
 export const popularApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getPopular: build.query<PopularApi, Category>({
@@ -17,13 +22,15 @@ export const popularApi = baseApi.injectEndpoints({
         },
       }),
     }),
-    getSearch: build.query<PopularApi, string>({
-      query: (search) => ({
+    getSearch: build.query<PopularApi, Search>({
+      query: ({ search, pageNumber }) => ({
         url: `/search/movie`,
         params: {
+          page: pageNumber,
           query: search,
         },
       }),
+      providesTags: ['Search'],
     }),
     getSortAndFilter: build.query<PopularApi, SortAndFilterParams>({
       query: (params) => ({
