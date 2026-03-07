@@ -17,6 +17,7 @@ export const kinopoisk = {
   filtered: '/kinopoisk/filtered',
   searchPage: '/kinopoisk/searchPage',
   favorites: '/kinopoisk/favorites',
+  notFound: '/kinopoisk/404',
 } as const
 
 export const themeApp = (theme: ThemeState) => ({

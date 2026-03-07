@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/common/hooks'
 import { Path } from '@/common/routing'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { category, kinopoisk, themeApp } from '@/common/constants'
-import { changeSearchAC, selectTheme, toggleTheme } from '@/app/appSlice.ts'
+import { changeCategoryAC, changeSearchAC, selectTheme, toggleTheme } from '@/app/appSlice.ts'
 
 export const Header = () => {
   const dispatch = useAppDispatch()
@@ -17,6 +17,7 @@ export const Header = () => {
   const navigateHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault()
     navigate(`${kinopoisk.category}${category.POPULAR}`)
+    dispatch(changeCategoryAC(category.POPULAR))
     window.scrollTo(0, 0)
   }
 

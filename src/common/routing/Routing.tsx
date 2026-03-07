@@ -1,8 +1,8 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { Main } from '@/features/popular/ui/Main.tsx'
 import { Category } from '@/features/popular/ui/category'
 import { SearchPage } from '@/features/popular/ui/SearchPage/SearchPage.tsx'
-import { FilterAndSort, Movie } from '@/common/components'
+import { FilterAndSort, Movie, PageNotFound } from '@/common/components'
 import { kinopoisk } from '@/common/constants'
 import { Favorites } from '@/features/Favorites'
 
@@ -14,7 +14,8 @@ export const Path = {
   Filtered: `${kinopoisk.filtered}`,
   SearchPage: `${kinopoisk.searchPage}`,
   Favorites: `${kinopoisk.favorites}`,
-  PageNonFound: '*',
+  NotFound: '*',
+  PageNotFound: `${kinopoisk.notFound}`,
 } as const
 
 export const Routing = () => {
@@ -40,7 +41,8 @@ export const Routing = () => {
           </h2>
         }
       />
-      <Route path={Path.PageNonFound} element={<h2>404</h2>} />
+      <Route path={Path.PageNotFound} element={<PageNotFound />} />
+      <Route path={Path.NotFound} element={<Navigate to={Path.PageNotFound} />} />
     </Routes>
   )
 }
