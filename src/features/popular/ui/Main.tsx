@@ -1,7 +1,7 @@
 import { useGetPopularQuery } from '@/features/popular/api/popularApi.ts'
 import s from './Main.module.css'
 import { bgUrl, category } from '@/common/constants'
-import { PreviewCategory } from '@/common/components/PreviewCategory'
+import { PreviewCategory } from '@/common/components'
 import { Search } from '@/common/components'
 
 const random = Math.ceil(Math.random() * 6)
