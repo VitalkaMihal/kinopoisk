@@ -4,7 +4,7 @@ import s from './Category.module.css'
 import { changeCategoryAC, selectCategory, selectTheme } from '@/app/appSlice.ts'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Card, MySkeleton, Pagination } from '@/common/components'
+import { Card, LinearProgress, MySkeleton, Pagination } from '@/common/components'
 import React, { useState } from 'react'
 
 export const Category = () => {
@@ -16,7 +16,7 @@ export const Category = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const { data, isLoading } = useGetPopularQuery({ category: categoryStore, pageNumber: currentPage })
+  const { data, isLoading, isFetching } = useGetPopularQuery({ category: categoryStore, pageNumber: currentPage })
   let pagesCount = 500
   if (data) pagesCount = data?.total_pages < 500 ? data?.total_pages : 500
 
@@ -32,44 +32,47 @@ export const Category = () => {
   }
 
   return (
-    <div className={s.container} style={style as React.CSSProperties}>
-      <div className={s.buttonsWrapper}>
-        <button className={className(category.POPULAR)} onClick={() => getCategoryMoviesHandler(category.POPULAR)}>
-          Popular Movies
-        </button>
-        <button className={className(category.TOP)} onClick={() => getCategoryMoviesHandler(category.TOP)}>
-          Top Rated Movies
-        </button>
-        <button className={className(category.UPCOMING)} onClick={() => getCategoryMoviesHandler(category.UPCOMING)}>
-          Upcoming Movies
-        </button>
-        <button className={className(category.NOW)} onClick={() => getCategoryMoviesHandler(category.NOW)}>
-          Now Playing Movies
-        </button>
+    <>
+      {!isLoading && isFetching && <LinearProgress />}
+      <div className={s.container} style={style as React.CSSProperties}>
+        <div className={s.buttonsWrapper}>
+          <button className={className(category.POPULAR)} onClick={() => getCategoryMoviesHandler(category.POPULAR)}>
+            Popular Movies
+          </button>
+          <button className={className(category.TOP)} onClick={() => getCategoryMoviesHandler(category.TOP)}>
+            Top Rated Movies
+          </button>
+          <button className={className(category.UPCOMING)} onClick={() => getCategoryMoviesHandler(category.UPCOMING)}>
+            Upcoming Movies
+          </button>
+          <button className={className(category.NOW)} onClick={() => getCategoryMoviesHandler(category.NOW)}>
+            Now Playing Movies
+          </button>
+        </div>
+        <h3>{categoryStore}</h3>
+        {isLoading && <MySkeleton count={20} />}
+        {!isLoading && (
+          <>
+            <div className={s.pagination}>
+              <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
+            </div>
+            <div className={s.moviesGrid}>
+              {data?.results.map((movie) => (
+                <Card
+                  key={movie.id}
+                  title={movie.title}
+                  poster={movie.poster_path}
+                  rating={movie.vote_average}
+                  id={movie.id}
+                />
+              ))}
+            </div>
+            <div className={s.pagination}>
+              <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
+            </div>
+          </>
+        )}
       </div>
-      <h3>{categoryStore}</h3>
-      {isLoading && <MySkeleton count={20} />}
-      {!isLoading && (
-        <>
-          <div className={s.pagination}>
-            <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
-          </div>
-          <div className={s.moviesGrid}>
-            {data?.results.map((movie) => (
-              <Card
-                key={movie.id}
-                title={movie.title}
-                poster={movie.poster_path}
-                rating={movie.vote_average}
-                id={movie.id}
-              />
-            ))}
-          </div>
-          <div className={s.pagination}>
-            <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
-          </div>
-        </>
-      )}
-    </div>
+    </>
   )
 }
