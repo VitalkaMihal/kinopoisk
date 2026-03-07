@@ -6,12 +6,13 @@ import { Path } from '@/common/routing'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { category, kinopoisk, themeApp } from '@/common/constants'
 import { changeSearchAC, selectTheme, toggleTheme } from '@/app/appSlice.ts'
+import { toast, ToastContainer } from 'react-toastify'
 
 export const Header = () => {
   const dispatch = useAppDispatch()
   const theme = useAppSelector(selectTheme)
   const style = themeApp(theme)
-
+  const notify = () => toast('Wow so easy!')
   const navigate = useNavigate()
 
   const navigateHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -80,6 +81,8 @@ export const Header = () => {
         >
           {theme === 'dark' ? 'light' : 'dark'}
         </button>
+        <button onClick={notify}>Notify!</button>
+        <ToastContainer />
       </div>
     </div>
   )
