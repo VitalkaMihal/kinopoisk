@@ -4,6 +4,8 @@ export const baseApi = createApi({
   reducerPath: 'kinopoiskApi',
   tagTypes: ['Search', 'Popular'],
   baseQuery: async (args, api, extraOptions) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+
     const result = await fetchBaseQuery({
       baseUrl: import.meta.env.VITE_BASE_URL,
       headers: {

@@ -4,7 +4,7 @@ import s from './Category.module.css'
 import { changeCategoryAC, selectCategory, selectTheme } from '@/app/appSlice.ts'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Card, Pagination } from '@/common/components'
+import { Card, MySkeleton, Pagination } from '@/common/components'
 import React, { useState } from 'react'
 
 export const Category = () => {
@@ -16,13 +16,9 @@ export const Category = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const { data } = useGetPopularQuery({ category: categoryStore, pageNumber: currentPage })
+  const { data, isLoading } = useGetPopularQuery({ category: categoryStore, pageNumber: currentPage })
 
-  if (!data) {
-    return
-  }
-
-  const pagesCount = data?.total_pages < 500 ? data?.total_pages : 500
+  const pagesCount = data?.total_pages && data?.total_pages < 500 ? data?.total_pages : 500
 
   const getCategoryMoviesHandler = (filmCategory: categoryType) => {
     dispatch(changeCategoryAC(filmCategory))
@@ -52,23 +48,28 @@ export const Category = () => {
         </button>
       </div>
       <h3>{categoryStore}</h3>
-      <div className={s.pagination}>
-        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
-      </div>
-      <div className={s.moviesGrid}>
-        {data.results.map((movie) => (
-          <Card
-            key={movie.id}
-            title={movie.title}
-            poster={movie.poster_path}
-            rating={movie.vote_average}
-            id={movie.id}
-          />
-        ))}
-      </div>
-      <div className={s.pagination}>
-        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
-      </div>
+      {isLoading && <MySkeleton count={20} />}
+      {!isLoading && (
+        <>
+          <div className={s.pagination}>
+            <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
+          </div>
+          <div className={s.moviesGrid}>
+            {data?.results.map((movie) => (
+              <Card
+                key={movie.id}
+                title={movie.title}
+                poster={movie.poster_path}
+                rating={movie.vote_average}
+                id={movie.id}
+              />
+            ))}
+          </div>
+          <div className={s.pagination}>
+            <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
+          </div>
+        </>
+      )}
     </div>
   )
 }
