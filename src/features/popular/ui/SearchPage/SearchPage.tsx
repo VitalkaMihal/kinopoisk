@@ -1,6 +1,6 @@
 import s from './SaerchPage.module.css'
 import { useLazyGetSearchQuery } from '@/features/popular/api/popularApi.ts'
-import { Card, Pagination, Search } from '@/common/components'
+import { Card, MySkeleton, Pagination, Search } from '@/common/components'
 import { selectSearchText } from '@/app/appSlice.ts'
 import { useAppSelector } from '@/common/hooks'
 import { useEffect, useState } from 'react'
@@ -9,7 +9,7 @@ export const SearchPage = () => {
   const searchingText = useAppSelector(selectSearchText)
   const [currentPage, setCurrentPage] = useState(1)
 
-  const [trigger, { data }] = useLazyGetSearchQuery()
+  const [trigger, { data, isLoading }] = useLazyGetSearchQuery()
 
   useEffect(() => {
     if (searchingText) {
@@ -37,6 +37,7 @@ export const SearchPage = () => {
         </div>
       )}
       <div className={s.cards}>
+        {isLoading && <MySkeleton count={20} />}
         {data &&
           searchingText &&
           (data.results.length ? (

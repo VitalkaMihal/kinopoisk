@@ -4,7 +4,8 @@ import s from './PreviewCategory.module.css'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '@/common/hooks'
 import { changeCategoryAC } from '@/app/appSlice.ts'
-import { Card } from '@/common/components'
+import { Card, MySkeleton } from '@/common/components'
+import type { Results } from '@/features/popular/api/popularApi.types.ts'
 
 type Props = {
   previewCategory: categoryType
@@ -12,15 +13,14 @@ type Props = {
 }
 
 export const PreviewCategory = ({ previewCategory, titleCategory }: Props) => {
-  const { data } = useGetPopularQuery({ category: previewCategory, pageNumber: 1 })
+  const { data, isLoading } = useGetPopularQuery({ category: previewCategory, pageNumber: 1 })
   const navigate = useNavigate()
 
   const dispatch = useAppDispatch()
 
-  if (!data) {
-    return
-  }
-  const previevData = data.results.slice(0, 6)
+  let previewData: Results[] = [] as Results[]
+
+  if (data) previewData = data.results.slice(0, 6)
 
   const viewMoreHandler = () => {
     navigate(`${kinopoisk.category}${previewCategory}`)
@@ -36,8 +36,9 @@ export const PreviewCategory = ({ previewCategory, titleCategory }: Props) => {
           View more
         </button>
       </div>
+      {isLoading && <MySkeleton count={6} />}
       <div className={s.cards}>
-        {previevData.map((movie) => (
+        {previewData.map((movie) => (
           <Card
             key={movie.id}
             id={movie.id}

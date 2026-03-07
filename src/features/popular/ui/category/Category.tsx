@@ -17,8 +17,8 @@ export const Category = () => {
   const navigate = useNavigate()
 
   const { data, isLoading } = useGetPopularQuery({ category: categoryStore, pageNumber: currentPage })
-
-  const pagesCount = data?.total_pages && data?.total_pages < 500 ? data?.total_pages : 500
+  let pagesCount = 500
+  if (data) pagesCount = data?.total_pages < 500 ? data?.total_pages : 500
 
   const getCategoryMoviesHandler = (filmCategory: categoryType) => {
     dispatch(changeCategoryAC(filmCategory))

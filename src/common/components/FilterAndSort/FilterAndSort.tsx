@@ -1,5 +1,5 @@
 import { useGetSortAndFilterQuery } from '@/features/popular/api/popularApi.ts'
-import { Card, Pagination } from '@/common/components'
+import { Card, MySkeleton, Pagination } from '@/common/components'
 import React, { useState } from 'react'
 import type { SortAndFilterParams } from '@/features/popular/api/popularApi.types.ts'
 import s from './FilterAndSort.module.css'
@@ -62,13 +62,9 @@ export const FilterAndSort = () => {
     500,
   )
 
-  const { data } = useGetSortAndFilterQuery(sortAndGenre)
+  const { data, isLoading } = useGetSortAndFilterQuery(sortAndGenre)
 
-  if (!data) {
-    return
-  }
-
-  const pagesCount = data?.total_pages < 500 ? data?.total_pages : 500
+  const pagesCount = data?.total_pages && data?.total_pages < 500 ? data?.total_pages : 500
 
   return (
     <div style={style as React.CSSProperties} className={s.filterAndSort}>
@@ -121,11 +117,12 @@ export const FilterAndSort = () => {
         </div>
       </div>
       <div className={s.resultsContainer}>
+        {isLoading && <MySkeleton count={20} />}
         <div className={s.pagination}>
           <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
         </div>
         <div className={s.cards}>
-          {data.results.map((movie) => (
+          {data?.results.map((movie) => (
             <Card
               key={movie.id}
               title={movie.title}
