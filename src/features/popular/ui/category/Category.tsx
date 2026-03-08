@@ -1,32 +1,43 @@
-import { useGetPopularQuery } from '@/features/popular/api/popularApi.ts'
+import { useLazyGetPopularQuery } from '@/features/popular/api/popularApi.ts'
 import { category, type categoryType, kinopoisk, themeApp } from '@/common/constants'
 import s from './Category.module.css'
-import { changeCategoryAC, selectCategory, selectTheme } from '@/app/appSlice.ts'
-import { useAppDispatch, useAppSelector } from '@/common/hooks'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { selectTheme } from '@/app/appSlice.ts'
+import { useAppSelector } from '@/common/hooks'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Card, LinearProgress, MySkeleton, Pagination } from '@/common/components'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { isCategory } from '@/common/utils'
 
 export const Category = () => {
   const [currentPage, setCurrentPage] = useState(1)
-  const categoryStore = useAppSelector(selectCategory)
   const theme = useAppSelector(selectTheme)
   const style = themeApp(theme)
-  const location = useLocation()
-  const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const param = useParams() || { categoryName: '' }
+  const ParamCategory = param.categoryName || ''
 
-  const { data, isLoading, isFetching } = useGetPopularQuery({ category: categoryStore, pageNumber: currentPage })
+  const [trigger, { data, isLoading, isFetching }] = useLazyGetPopularQuery()
+
+  useEffect(() => {
+    if (isCategory(ParamCategory)) {
+      trigger({
+        category: ParamCategory,
+        pageNumber: currentPage,
+      })
+    } else {
+      navigate(kinopoisk.notFound)
+    }
+  }, [ParamCategory, currentPage])
+
   let pagesCount = 500
   if (data) pagesCount = data?.total_pages < 500 ? data?.total_pages : 500
 
   const getCategoryMoviesHandler = (filmCategory: categoryType) => {
-    dispatch(changeCategoryAC(filmCategory))
     navigate(`${kinopoisk.category}${filmCategory}`)
   }
 
   const className = (cat: categoryType) => {
-    if (location.pathname.endsWith(cat)) {
+    if (ParamCategory === cat) {
       return s.active
     }
   }
@@ -49,9 +60,9 @@ export const Category = () => {
             Now Playing Movies
           </button>
         </div>
-        <h3>{categoryStore}</h3>
+        <h3>{param.categoryName}</h3>
         {isLoading && <MySkeleton count={20} />}
-        {!isLoading && (
+        {data && (
           <>
             <div className={s.pagination}>
               <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />

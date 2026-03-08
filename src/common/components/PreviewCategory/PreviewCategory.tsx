@@ -2,8 +2,6 @@ import { useGetPopularQuery } from '@/features/popular/api/popularApi.ts'
 import { type categoryType, kinopoisk } from '@/common/constants'
 import s from './PreviewCategory.module.css'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '@/common/hooks'
-import { changeCategoryAC } from '@/app/appSlice.ts'
 import { Card, MySkeleton } from '@/common/components'
 import type { Results } from '@/features/popular/api/popularApi.types.ts'
 
@@ -16,15 +14,12 @@ export const PreviewCategory = ({ previewCategory, titleCategory }: Props) => {
   const { data, isLoading } = useGetPopularQuery({ category: previewCategory, pageNumber: 1 })
   const navigate = useNavigate()
 
-  const dispatch = useAppDispatch()
-
   let previewData: Results[] = [] as Results[]
 
   if (data) previewData = data.results.slice(0, 6)
 
   const viewMoreHandler = () => {
     navigate(`${kinopoisk.category}${previewCategory}`)
-    dispatch(changeCategoryAC(previewCategory))
     window.scrollTo(0, 0)
   }
 

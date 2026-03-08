@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { category, type categoryType } from '@/common/constants'
 
 export type Favorite = {
   poster: string
@@ -18,12 +17,7 @@ const favoriteMovies =
     ? JSON.parse(localStorage.getItem('favorites') as string)
     : ([] as Favorite[])
 
-const categoryFromStorage = JSON.parse(localStorage.getItem('category') as string)
-
-const categoryValue = (categoryFromStorage ? categoryFromStorage : category.POPULAR) as categoryType
-
 const initialState = {
-  category: categoryValue as categoryType,
   searchText: '' as string,
   favorites: favoriteMovies as Favorite[],
   theme,
@@ -33,10 +27,6 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: (create) => ({
-    changeCategoryAC: create.reducer<categoryType>((state, action) => {
-      state.category = action.payload
-      localStorage.setItem('category', JSON.stringify(action.payload))
-    }),
     changeSearchAC: create.reducer<string>((state, action) => {
       state.searchText = action.payload
     }),
@@ -58,20 +48,12 @@ export const appSlice = createSlice({
     }),
   }),
   selectors: {
-    selectCategory: (state) => state.category,
     selectSearchText: (state) => state.searchText,
     selectFavorites: (state) => state.favorites,
     selectTheme: (state) => state.theme,
   },
 })
 
-export const {
-  changeCategoryAC,
-  changeSearchAC,
-  getMovieIdAC,
-  addFavoriteMovieAC,
-  deleteFavoriteMovieAC,
-  toggleTheme,
-} = appSlice.actions
+export const { changeSearchAC, getMovieIdAC, addFavoriteMovieAC, deleteFavoriteMovieAC, toggleTheme } = appSlice.actions
 export const appReducer = appSlice.reducer
-export const { selectCategory, selectSearchText, selectFavorites, selectTheme } = appSlice.selectors
+export const { selectSearchText, selectFavorites, selectTheme } = appSlice.selectors

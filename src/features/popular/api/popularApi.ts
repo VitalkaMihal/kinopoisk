@@ -60,6 +60,7 @@ export const popularApi = baseApi.injectEndpoints({
 
 export const {
   useGetPopularQuery,
+  useLazyGetPopularQuery,
   useLazyGetSearchQuery,
   useGetDetailsQuery,
   useGetCreditsQuery,

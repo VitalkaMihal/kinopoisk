@@ -7,7 +7,7 @@ import { kinopoisk } from '@/common/constants'
 import { Favorites } from '@/features/Favorites'
 
 export const Path = {
-  Main: `${kinopoisk.main}`,
+  Main: kinopoisk.main,
   Category: `${kinopoisk.category}:categoryName`,
   CategoryActive: `${kinopoisk.category}`,
   Card: `${kinopoisk.movie}:cardName`,
