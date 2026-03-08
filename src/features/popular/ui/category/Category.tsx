@@ -34,6 +34,7 @@ export const Category = () => {
 
   const getCategoryMoviesHandler = (filmCategory: categoryType) => {
     navigate(`${kinopoisk.category}${filmCategory}`)
+    setCurrentPage(1)
   }
 
   const className = (cat: categoryType) => {

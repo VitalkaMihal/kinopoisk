@@ -1,10 +1,11 @@
-import { useGetDetailsQuery } from '@/features/popular/api/popularApi.ts'
+import { useLazyGetDetailsQuery } from '@/features/popular/api/popularApi.ts'
 import s from './Movie.module.css'
-import { cardUrl } from '@/common/constants'
-import { useNavigate } from 'react-router-dom'
+import { cardUrl, kinopoisk } from '@/common/constants'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Credits, FavoriteButton, Rating, Similar } from '@/common/components'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { useEffect } from 'react'
 
 type MovieInfo = {
   rating: number
@@ -16,10 +17,18 @@ const convertRuntime = (time: number): string => {
 }
 
 export const Movie = () => {
+  const param = Number(useParams().cardName)
   const navigate = useNavigate()
   const movieInfo = JSON.parse(localStorage.getItem('movieInfo') as string) as MovieInfo
+  const [trigger, { data, isLoading }] = useLazyGetDetailsQuery()
 
-  const { data, isLoading } = useGetDetailsQuery(movieInfo.id)
+  useEffect(() => {
+    if (movieInfo.id === param) {
+      trigger(movieInfo.id)
+    } else {
+      navigate(kinopoisk.notFound)
+    }
+  }, [movieInfo, param])
 
   const backgroundImage = data?.poster_path
     ? `url(${cardUrl + data?.poster_path})`
@@ -39,41 +48,43 @@ export const Movie = () => {
         </div>
       )}
       {data && (
-        <div className={s.details}>
-          <div
-            className={s.image}
-            style={{
-              backgroundImage: backgroundImage,
-            }}
-          ></div>
-          <div className={s.text}>
-            <div className={s.title}>
-              <h2>{data.title}</h2>
-              <button onClick={goBack}>Back</button>
-            </div>
-            <div className={s.info}>
-              Release year: {year}
-              <FavoriteButton
-                poster={data.poster_path}
-                title={data.title}
-                rating={movieInfo.rating}
-                id={movieInfo.id}
-              />
-              <Rating rating={movieInfo.rating} />
-              Runtime: {convertRuntime(data.runtime)}
-            </div>
-            <div className={s.overview}>{data.overview}</div>
-            <h3 className={s.genresTitle}>Genres</h3>
-            <div className={s.genres}>
-              {data.genres.map((genre) => (
-                <span key={genre.id}>{genre.name}</span>
-              ))}
+        <>
+          <div className={s.details}>
+            <div
+              className={s.image}
+              style={{
+                backgroundImage: backgroundImage,
+              }}
+            ></div>
+            <div className={s.text}>
+              <div className={s.title}>
+                <h2>{data.title}</h2>
+                <button onClick={goBack}>Back</button>
+              </div>
+              <div className={s.info}>
+                Release year: {year}
+                <FavoriteButton
+                  poster={data.poster_path}
+                  title={data.title}
+                  rating={movieInfo.rating}
+                  id={movieInfo.id}
+                />
+                <Rating rating={movieInfo.rating} />
+                Runtime: {convertRuntime(data.runtime)}
+              </div>
+              <div className={s.overview}>{data.overview}</div>
+              <h3 className={s.genresTitle}>Genres</h3>
+              <div className={s.genres}>
+                {data.genres.map((genre) => (
+                  <span key={genre.id}>{genre.name}</span>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+          <Credits id={movieInfo.id} />
+          <Similar id={movieInfo.id} />
+        </>
       )}
-      <Credits id={movieInfo.id} />
-      <Similar id={movieInfo.id} />
     </div>
   )
 }

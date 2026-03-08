@@ -62,7 +62,7 @@ export const {
   useGetPopularQuery,
   useLazyGetPopularQuery,
   useLazyGetSearchQuery,
-  useGetDetailsQuery,
+  useLazyGetDetailsQuery,
   useGetCreditsQuery,
   useGetSimilarQuery,
   useGetSortAndFilterQuery,
