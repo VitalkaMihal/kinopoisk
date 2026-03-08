@@ -23,12 +23,12 @@ export const Movie = () => {
   const [trigger, { data, isLoading }] = useLazyGetDetailsQuery()
 
   useEffect(() => {
-    if (movieInfo.id === param) {
+    if (movieInfo.id === param && !data) {
       trigger(movieInfo.id)
-    } else {
+    } else if (movieInfo.id !== param) {
       navigate(kinopoisk.notFound)
     }
-  }, [movieInfo, param])
+  }, [movieInfo, param, data])
 
   const backgroundImage = data?.poster_path
     ? `url(${cardUrl + data?.poster_path})`
