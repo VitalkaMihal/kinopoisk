@@ -104,5 +104,3 @@ export const genresForFilter = [
     name: 'Western',
   },
 ] as const
-
-export type categoryType = 'now_playing' | 'popular' | 'top_rated' | 'upcoming'

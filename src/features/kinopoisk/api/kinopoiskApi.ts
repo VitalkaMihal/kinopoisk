@@ -1,48 +1,56 @@
 import { baseApi } from '@/app/baseApi.ts'
-import type { Search, Category, CreditsApi, MovieApi, PopularApi, SortAndFilterParams } from './kinopoiskApi.types.ts'
+import type { Category, Search, SortAndFilterParams } from '@/common/types'
+import { withZodCatch } from '@/common/utils'
+import { CreditsApiSchema, MovieApiSchema, PopularApiSchema } from '@/features/kinopoisk/lib/schemas'
 
 export const kinopoiskApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getPopular: build.query<PopularApi, Category>({
-      query: ({ category, pageNumber }) => ({
+    getPopular: build.query({
+      query: ({ category, pageNumber }: Category) => ({
         url: `/movie/${category}`,
         params: {
           page: pageNumber,
         },
       }),
+      ...withZodCatch(PopularApiSchema),
     }),
-    getSearch: build.query<PopularApi, Search>({
-      query: ({ search, pageNumber }) => ({
+    getSearch: build.query({
+      query: ({ search, pageNumber }: Search) => ({
         url: `/search/movie`,
         params: {
           page: pageNumber,
           query: search,
         },
+        ...withZodCatch(PopularApiSchema),
       }),
       providesTags: ['Search'],
     }),
-    getSortAndFilter: build.query<PopularApi, SortAndFilterParams>({
-      query: (params) => ({
+    getSortAndFilter: build.query({
+      query: (params: SortAndFilterParams) => ({
         url: `/discover/movie`,
         params: {
           ...params,
         },
       }),
+      ...withZodCatch(PopularApiSchema),
     }),
-    getDetails: build.query<MovieApi, number>({
-      query: (id) => ({
+    getDetails: build.query({
+      query: (id: number) => ({
         url: `movie/${id}`,
       }),
+      ...withZodCatch(MovieApiSchema),
     }),
-    getCredits: build.query<CreditsApi, number>({
-      query: (id) => ({
+    getCredits: build.query({
+      query: (id: number) => ({
         url: `movie/${id}/credits`,
       }),
+      ...withZodCatch(CreditsApiSchema),
     }),
-    getSimilar: build.query<PopularApi, number>({
-      query: (id) => ({
+    getSimilar: build.query({
+      query: (id: number) => ({
         url: `movie/${id}/similar`,
       }),
+      ...withZodCatch(PopularApiSchema),
     }),
   }),
 })
