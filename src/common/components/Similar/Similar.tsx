@@ -1,5 +1,5 @@
 import { useGetSimilarQuery } from '@/features/kinopoisk/api/kinopoiskApi.ts'
-import { Card, MySkeleton } from '@/common/components'
+import { CallbackMovie, MySkeleton } from '@/common/components'
 import s from './Similar.module.css'
 
 type Props = {
@@ -15,19 +15,7 @@ export const Similar = ({ id }: Props) => {
     <div className={s.similar}>
       <h2>Similar Movies</h2>
       {isLoading && <MySkeleton count={6} />}
-      {data && (
-        <div className={s.similarMovies}>
-          {similarData.map((movie) => (
-            <Card
-              key={movie.id}
-              id={movie.id}
-              title={movie.title}
-              poster={movie.poster_path}
-              rating={movie.vote_average}
-            />
-          ))}
-        </div>
-      )}
+      {data && <div className={s.similarMovies}>{similarData.map((movie) => CallbackMovie(movie))}</div>}
     </div>
   )
 }

@@ -36,6 +36,9 @@ export const Movie = () => {
   const backgroundImage = data?.poster_path
     ? `url(${cardUrl + data?.poster_path})`
     : `url(https://placehold.co/280x420/transparent/FOO/png?text=NO+IMAGE)`
+
+  const poster = data?.poster_path || 'https://placehold.co/280x420/transparent/FOO/png?text=NO+IMAGE'
+
   const goBack = () => {
     navigate(-1)
   }
@@ -66,12 +69,7 @@ export const Movie = () => {
               </div>
               <div className={s.info}>
                 Release year: {year}
-                <FavoriteButton
-                  poster={data.poster_path}
-                  title={data.title}
-                  rating={movieInfo.rating}
-                  id={movieInfo.id}
-                />
+                <FavoriteButton poster={poster} title={data.title} rating={movieInfo.rating} id={movieInfo.id} />
                 <Rating rating={movieInfo.rating} />
                 Runtime: {convertRuntime(data.runtime)}
               </div>

@@ -1,9 +1,10 @@
 import { useGetPopularQuery } from '@/features/kinopoisk/api/kinopoiskApi.ts'
-import { type categoryType, kinopoisk } from '@/common/constants'
+import { kinopoisk } from '@/common/constants'
 import s from './PreviewCategory.module.css'
 import { useNavigate } from 'react-router-dom'
-import { Card, MySkeleton } from '@/common/components'
+import { CallbackMovie, MySkeleton } from '@/common/components'
 import type { Results } from '@/features/kinopoisk/api/kinopoiskApi.types.ts'
+import type { categoryType } from '@/common/types'
 
 type Props = {
   previewCategory: categoryType
@@ -32,17 +33,7 @@ export const PreviewCategory = ({ previewCategory, titleCategory }: Props) => {
         </button>
       </div>
       {isLoading && <MySkeleton count={6} />}
-      <div className={s.cards}>
-        {previewData.map((movie) => (
-          <Card
-            key={movie.id}
-            id={movie.id}
-            title={movie.title}
-            poster={movie.poster_path}
-            rating={movie.vote_average}
-          />
-        ))}
-      </div>
+      <div className={s.cards}>{previewData.map((movie) => CallbackMovie(movie))}</div>
     </div>
   )
 }

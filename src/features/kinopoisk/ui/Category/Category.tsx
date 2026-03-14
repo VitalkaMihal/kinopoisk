@@ -1,12 +1,13 @@
 import { useLazyGetPopularQuery } from '@/features/kinopoisk/api/kinopoiskApi.ts'
-import { category, type categoryType, kinopoisk, themeApp } from '@/common/constants'
+import { category, kinopoisk, themeApp } from '@/common/constants'
 import s from './Category.module.css'
 import { selectTheme } from '@/app/appSlice.ts'
 import { useAppSelector } from '@/common/hooks'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Card, LinearProgress, MySkeleton, Pagination } from '@/common/components'
+import { CallbackMovie, LinearProgress, MySkeleton, Pagination } from '@/common/components'
 import React, { useEffect, useState } from 'react'
 import { isCategory } from '@/common/utils'
+import type { categoryType } from '@/common/types'
 
 export const Category = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -68,17 +69,7 @@ export const Category = () => {
             <div className={s.pagination}>
               <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
             </div>
-            <div className={s.moviesGrid}>
-              {data?.results.map((movie) => (
-                <Card
-                  key={movie.id}
-                  title={movie.title}
-                  poster={movie.poster_path}
-                  rating={movie.vote_average}
-                  id={movie.id}
-                />
-              ))}
-            </div>
+            <div className={s.moviesGrid}>{data?.results.map((movie) => CallbackMovie(movie))}</div>
             <div className={s.pagination}>
               <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
             </div>

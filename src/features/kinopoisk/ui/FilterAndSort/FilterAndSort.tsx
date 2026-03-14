@@ -1,13 +1,13 @@
 import { useGetSortAndFilterQuery } from '@/features/kinopoisk/api/kinopoiskApi.ts'
-import { Card, LinearProgress, MySkeleton, Pagination } from '@/common/components'
+import { CallbackMovie, LinearProgress, MySkeleton, Pagination } from '@/common/components'
 import React, { useState } from 'react'
-import type { SortAndFilterParams } from '@/features/kinopoisk/api/kinopoiskApi.types.ts'
 import s from './FilterAndSort.module.css'
 import { useAppSelector, useDebounce } from '@/common/hooks'
 import { selectTheme } from '@/app/appSlice.ts'
 import { genresForFilter, themeApp } from '@/common/constants'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
+import type { SortAndFilterParams } from '@/common/types'
 
 export const FilterAndSort = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -123,17 +123,7 @@ export const FilterAndSort = () => {
           <div className={s.pagination}>
             <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
           </div>
-          <div className={s.cards}>
-            {data?.results.map((movie) => (
-              <Card
-                key={movie.id}
-                title={movie.title}
-                poster={movie.poster_path}
-                rating={movie.vote_average}
-                id={movie.id}
-              />
-            ))}
-          </div>
+          <div className={s.cards}>{data?.results.map((movie) => CallbackMovie(movie))}</div>
           <div className={s.pagination}>
             <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={pagesCount || 1} />
           </div>
