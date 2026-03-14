@@ -1,6 +1,6 @@
 import s from './SaerchPage.module.css'
 import { useLazyGetSearchQuery } from '@/features/kinopoisk/api/kinopoiskApi.ts'
-import { Card, LinearProgress, MySkeleton, Pagination, Search } from '@/common/components'
+import { CallbackMovie, LinearProgress, MySkeleton, Pagination, Search } from '@/common/components'
 import { selectSearchText } from '@/app/appSlice.ts'
 import { useAppSelector } from '@/common/hooks'
 import { useEffect, useState } from 'react'
@@ -43,15 +43,7 @@ export const SearchPage = () => {
           {data &&
             searchingText &&
             (data.results.length ? (
-              data.results.map((movie) => (
-                <Card
-                  key={movie.id}
-                  title={movie.title}
-                  poster={movie.poster_path}
-                  rating={movie.vote_average}
-                  id={movie.id}
-                />
-              ))
+              data.results.map((movie) => CallbackMovie(movie))
             ) : (
               <span>
                 {`No matches found for`}

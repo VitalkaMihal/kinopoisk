@@ -21,9 +21,9 @@ export const kinopoiskApi = baseApi.injectEndpoints({
           page: pageNumber,
           query: search,
         },
-        ...withZodCatch(PopularApiSchema),
       }),
       providesTags: ['Search'],
+      ...withZodCatch(PopularApiSchema),
     }),
     getSortAndFilter: build.query({
       query: (params: SortAndFilterParams) => ({
