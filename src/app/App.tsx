@@ -4,6 +4,7 @@ import { Routing } from '@/common/routing'
 import s from './App.module.css'
 import { selectTheme } from '@/app/appSlice.ts'
 import { themeApp } from '@/common/constants'
+import { ToastContainer } from 'react-toastify'
 
 export const App = () => {
   const theme = useAppSelector(selectTheme)
@@ -16,6 +17,7 @@ export const App = () => {
         <Routing />
       </div>
       <Footer />
+      <ToastContainer />
     </div>
   )
 }

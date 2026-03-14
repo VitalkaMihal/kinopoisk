@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Credits, FavoriteButton, Rating, Similar } from '@/common/components'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 type MovieInfo = {
   rating: number
@@ -17,18 +17,21 @@ const convertRuntime = (time: number): string => {
 }
 
 export const Movie = () => {
+  const params = useRef<number[]>([])
   const param = Number(useParams().cardName)
   const navigate = useNavigate()
   const movieInfo = JSON.parse(localStorage.getItem('movieInfo') as string) as MovieInfo
   const [trigger, { data, isLoading }] = useLazyGetDetailsQuery()
 
   useEffect(() => {
-    if (movieInfo.id === param && !data) {
-      trigger(movieInfo.id)
-    } else if (movieInfo.id !== param) {
+    if (param && data?.id !== param) {
+      trigger(param)
+      params.current.push(param)
+    }
+    if (!params.current.includes(param)) {
       navigate(kinopoisk.notFound)
     }
-  }, [movieInfo, param, data])
+  }, [param])
 
   const backgroundImage = data?.poster_path
     ? `url(${cardUrl + data?.poster_path})`

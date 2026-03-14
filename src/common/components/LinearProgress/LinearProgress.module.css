@@ -2,8 +2,10 @@
     background: #23272f;
     border-radius: 8px;
     overflow: hidden;
-    position: relative;
+    position: sticky;
+    top: 60px;
     width: 100%;
+    z-index: 999;
 }
 
 .bar {
