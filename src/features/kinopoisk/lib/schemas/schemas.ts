@@ -75,7 +75,7 @@ export const SpokenLanguagesSchema = z.object({
 export const MovieApiSchema = z.object({
   adult: z.boolean(),
   backdrop_path: z.string().nullable().optional(),
-  belongs_to_collection: z.any().optional(),
+  belongs_to_collection: z.string().nullable().optional(),
   budget: z.number(),
   genres: z.array(z.object({ id: z.number(), name: z.string() })),
   homepage: z.string(),
