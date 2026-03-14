@@ -1,5 +1,5 @@
 import s from './SaerchPage.module.css'
-import { useLazyGetSearchQuery } from '@/features/popular/api/popularApi.ts'
+import { useLazyGetSearchQuery } from '@/features/kinopoisk/api/kinopoiskApi.ts'
 import { Card, LinearProgress, MySkeleton, Pagination, Search } from '@/common/components'
 import { selectSearchText } from '@/app/appSlice.ts'
 import { useAppSelector } from '@/common/hooks'

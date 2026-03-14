@@ -1,0 +1,5 @@
+export { Category } from './Category/Category.tsx'
+export { Favorites } from './Favorites/Favorites.tsx'
+export { FilterAndSort } from './FilterAndSort/FilterAndSort.tsx'
+export { Movie } from './Movie/Movie.tsx'
+export { SearchPage } from './SearchPage/SearchPage.tsx'

@@ -12,7 +12,7 @@ export const category = {
 
 export const kinopoisk = {
   main: '/kinopoisk',
-  category: '/kinopoisk/category/',
+  category: '/kinopoisk/Category/',
   movie: '/kinopoisk/movie/',
   filtered: '/kinopoisk/filtered',
   searchPage: '/kinopoisk/searchPage',

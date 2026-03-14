@@ -1,4 +1,4 @@
-import { useGetSimilarQuery } from '@/features/popular/api/popularApi.ts'
+import { useGetSimilarQuery } from '@/features/kinopoisk/api/kinopoiskApi.ts'
 import { Card, MySkeleton } from '@/common/components'
 import s from './Similar.module.css'
 

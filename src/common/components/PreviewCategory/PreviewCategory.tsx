@@ -1,9 +1,9 @@
-import { useGetPopularQuery } from '@/features/popular/api/popularApi.ts'
+import { useGetPopularQuery } from '@/features/kinopoisk/api/kinopoiskApi.ts'
 import { type categoryType, kinopoisk } from '@/common/constants'
 import s from './PreviewCategory.module.css'
 import { useNavigate } from 'react-router-dom'
 import { Card, MySkeleton } from '@/common/components'
-import type { Results } from '@/features/popular/api/popularApi.types.ts'
+import type { Results } from '@/features/kinopoisk/api/kinopoiskApi.types.ts'
 
 type Props = {
   previewCategory: categoryType

@@ -1,4 +1,4 @@
-import { useGetPopularQuery } from '@/features/popular/api/popularApi.ts'
+import { useGetPopularQuery } from '@/features/kinopoisk/api/kinopoiskApi.ts'
 import s from './Main.module.css'
 import { bgUrl, category } from '@/common/constants'
 import { PreviewCategory } from '@/common/components'

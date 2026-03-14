@@ -1,3 +1,5 @@
+import type { categoryType } from '@/common/constants'
+
 export type Results = {
   adult: boolean
   backdrop_path: string
@@ -109,4 +111,14 @@ export type SortAndFilterParams = {
   'vote_average.gte'?: number
   'vote_average.lte'?: number
   page: number
+}
+
+export type Category = {
+  category: categoryType
+  pageNumber: number
+}
+
+export type Search = {
+  search: string
+  pageNumber: number
 }

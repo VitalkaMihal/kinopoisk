@@ -1,4 +1,4 @@
-import { useLazyGetDetailsQuery } from '@/features/popular/api/popularApi.ts'
+import { useLazyGetDetailsQuery } from '@/features/kinopoisk/api/kinopoiskApi.ts'
 import s from './Movie.module.css'
 import { cardUrl, kinopoisk } from '@/common/constants'
 import { useNavigate, useParams } from 'react-router-dom'

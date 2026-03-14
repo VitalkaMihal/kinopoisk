@@ -1,4 +1,4 @@
-import { useGetCreditsQuery } from '@/features/popular/api/popularApi.ts'
+import { useGetCreditsQuery } from '@/features/kinopoisk/api/kinopoiskApi.ts'
 import s from './Credits.module.css'
 import { cardUrl } from '@/common/constants'
 import Skeleton from 'react-loading-skeleton'

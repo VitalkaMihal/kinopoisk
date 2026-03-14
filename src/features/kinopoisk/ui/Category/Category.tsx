@@ -1,4 +1,4 @@
-import { useLazyGetPopularQuery } from '@/features/popular/api/popularApi.ts'
+import { useLazyGetPopularQuery } from '@/features/kinopoisk/api/kinopoiskApi.ts'
 import { category, type categoryType, kinopoisk, themeApp } from '@/common/constants'
 import s from './Category.module.css'
 import { selectTheme } from '@/app/appSlice.ts'
