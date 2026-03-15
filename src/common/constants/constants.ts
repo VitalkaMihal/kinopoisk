@@ -11,13 +11,13 @@ export const category = {
 } as const
 
 export const kinopoisk = {
-  main: '/kinopoisk',
-  category: '/kinopoisk/Category/',
-  movie: '/kinopoisk/movie/',
-  filtered: '/kinopoisk/filtered',
-  searchPage: '/kinopoisk/searchPage',
-  favorites: '/kinopoisk/favorites',
-  notFound: '/kinopoisk/404',
+  main: '/',
+  category: 'category/',
+  movie: 'movie/',
+  filtered: 'filtered',
+  searchPage: 'searchPage',
+  favorites: 'favorites',
+  notFound: '404',
 } as const
 
 export const themeApp = (theme: ThemeState) => ({

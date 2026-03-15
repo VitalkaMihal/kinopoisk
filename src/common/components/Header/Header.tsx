@@ -16,7 +16,7 @@ export const Header = () => {
 
   const navigateHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault()
-    navigate(`${kinopoisk.category}${category.POPULAR}`)
+    navigate(`/${kinopoisk.category}${category.POPULAR}`)
     window.scrollTo(0, 0)
   }
 

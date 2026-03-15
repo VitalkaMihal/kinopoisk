@@ -26,7 +26,7 @@ export const Category = () => {
         pageNumber: currentPage,
       })
     } else {
-      navigate(kinopoisk.notFound)
+      navigate(`/${kinopoisk.notFound}`)
     }
   }, [ParamCategory, currentPage])
 
@@ -34,7 +34,7 @@ export const Category = () => {
   if (data) pagesCount = data?.total_pages < 500 ? data?.total_pages : 500
 
   const getCategoryMoviesHandler = (filmCategory: categoryType) => {
-    navigate(`${kinopoisk.category}${filmCategory}`)
+    navigate(`/${kinopoisk.category}${filmCategory}`)
     setCurrentPage(1)
   }
 

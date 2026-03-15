@@ -20,7 +20,7 @@ export const PreviewCategory = ({ previewCategory, titleCategory }: Props) => {
   if (data) previewData = data.results.slice(0, 6)
 
   const viewMoreHandler = () => {
-    navigate(`${kinopoisk.category}${previewCategory}`)
+    navigate(`/${kinopoisk.category}${previewCategory}`)
     window.scrollTo(0, 0)
   }
 

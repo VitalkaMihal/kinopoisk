@@ -29,7 +29,7 @@ export const Movie = () => {
       params.current.push(param)
     }
     if (!params.current.includes(param)) {
-      navigate(kinopoisk.notFound)
+      navigate(`/${kinopoisk.notFound}`)
     }
   }, [param])
 

@@ -1,9 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { Main } from '@/features/kinopoisk/ui/Main.tsx'
-import { SearchPage } from '@/features/kinopoisk/ui/SearchPage/SearchPage.tsx'
 import { PageNotFound } from '@/common/components'
 import { kinopoisk } from '@/common/constants'
-import { Category, Favorites, FilterAndSort, Movie } from '@/features/kinopoisk/ui'
+import { Category, Favorites, FilterAndSort, Movie, SearchPage } from '@/features/kinopoisk/ui'
 
 export const Path = {
   Main: kinopoisk.main,

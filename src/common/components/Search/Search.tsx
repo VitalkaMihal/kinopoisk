@@ -18,7 +18,7 @@ export const Search = () => {
   const handleSearch = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     dispatch(changeSearchAC(inputValue))
-    navigate(`${Path.SearchPage}`)
+    navigate(`/${Path.SearchPage}`)
   }
 
   const handlerInput = (value: React.ChangeEvent<HTMLInputElement>) => {

@@ -24,7 +24,7 @@ export const Card = ({ poster, title, rating, id }: Props) => {
 
   const onClickHandler = () => {
     dispatch(getMovieIdAC({ rating, id }))
-    navigate(`${kinopoisk.movie}${id}`)
+    navigate(`/${kinopoisk.movie}${id}`)
     window.scrollTo(0, 0)
   }
 
